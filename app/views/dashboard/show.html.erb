@@ -4,6 +4,11 @@
   <% current_user.jobs.each do |job| %>
     <li>
       <%= link_to job.title, job_path(job) %>
+      <% if job.resume %>
+        (Resume: <%= link_to job.resume.title, resume_path(job.resume) %>)
+      <% else %>
+        (No Resume Selected)
+      <% end %>
     </li>
   <% end %>
 </ul>

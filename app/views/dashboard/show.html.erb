@@ -9,6 +9,12 @@
       <% else %>
         (No Resume Selected)
       <% end %>
+
+      <% if job.letter %>
+        (Letter: <%= link_to job.letter.title, resume_path(job.letter) %>)
+      <% else %>
+        (No Letter Selected)
+      <% end %>
     </li>
   <% end %>
 </ul>
@@ -22,6 +28,15 @@
   <% end %>
 </ul>
 
+<h2>Your Letters</h2>
+<ul>
+  <% current_user.letters.each do |letter| %>
+    <li>
+      <%= link_to letter.title, letter_path(letter) %>
+    </li>
+  <% end %> 
+</ul>
+
 
 <ul>
   <li>
@@ -29,6 +44,9 @@
   </li>
   <li>
     <%= link_to 'Create a new resume', new_resume_path %>
+  </li>
+  <li>
+    <%= link_to 'Create a new letter', new_letter_path %>
   </li>
   <li>
     <%= link_to "Logout", destroy_user_session_path, method: :delete %>

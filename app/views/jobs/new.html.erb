@@ -28,6 +28,11 @@
     <%= f.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
   </div>
 
+  <div class="field">
+    <%= f.label :letter_id, "Cover Letter" %><br>
+    <%= f.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

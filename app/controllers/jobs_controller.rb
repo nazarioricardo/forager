@@ -1,8 +1,8 @@
-# app/controllers/jobs_controller.rb
 class JobsController < ApplicationController
   def new
     @job = Job.new
     @resumes = Resume.all
+    @letters = Letter.all
   end
 
   def create
@@ -17,6 +17,7 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     @resumes = Resume.all
+    @letters = Letter.all
   end
 
   def update
@@ -28,9 +29,20 @@ class JobsController < ApplicationController
     end
   end
 
+  
+  def update_resume
+    @job = Job.find(params[:id])
+    if @job.update(resume_id: params[:resume_id])
+      redirect_to @job
+    else
+      render :edit
+    end
+  end
+
+
   private
 
   def job_params
-    params.require(:job).permit(:title, :description, :resume_id)
+    params.require(:job).permit(:title, :description, :resume_id, :letter_id)
   end
 end

@@ -7,9 +7,13 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#show'
   # Jobs
   resources :jobs, only: [:new, :create, :show]
+  patch 'jobs/:id/update_resume', to: 'jobs#update_resume', as: 'update_job_resume'
 
   # Resumes
   resources :resumes, only: [:new, :create, :show]
+
+  # Letters
+  resources :letters, only: [:new, :create, :show]
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

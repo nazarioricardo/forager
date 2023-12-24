@@ -14,3 +14,17 @@
     <%= f.submit 'Add Resume' %>
   <% end %>
 <% end %>
+
+<% if @job.letter %>
+  <h2>Cover Letter: <%= @job.letter.title %></h2>
+  <%= form_with url: update_job_resume_path(@job), method: :patch do |form| %>
+    <%= form.label :resume_id, "Resume" %>
+    <%= form.collection_select :resume_id, Resume.all, :id, :title %>
+    <%= form.submit "Update" %>
+  <% end %>
+<% else %>
+  <%= form_with(model: @job, local: true) do |f| %>
+    <%= f.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
+    <%= f.submit 'Add Letter' %>
+  <% end %>
+<% end %>

@@ -2,6 +2,7 @@
 class JobsController < ApplicationController
   def new
     @job = Job.new
+    @resumes = Resume.all
   end
 
   def create
@@ -15,11 +16,21 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+    @resumes = Resume.all
+  end
+
+  def update
+    @job = Job.find(params[:id])
+    if @job.update(job_params)
+      redirect_to @job
+    else
+      render :edit
+    end
   end
 
   private
 
   def job_params
-    params.require(:job).permit(:title, :description)
+    params.require(:job).permit(:title, :description, :resume_id)
   end
 end

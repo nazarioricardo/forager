@@ -23,6 +23,11 @@
     <%= f.text_area :description %>
   </div>
 
+  <div class="field">
+    <%= f.label :resume_id, "Resume" %><br>
+    <%= f.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

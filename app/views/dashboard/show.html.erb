@@ -1,1 +1,17 @@
 <h1>Welcome Home, <%= current_user.email %></h1>
+<h2>Your Jobs</h2>
+<ul>
+  <% current_user.jobs.each do |job| %>
+    <li>
+      <%= link_to job.title, job_path(job) %>
+    </li>
+  <% end %>
+</ul>
+<ul>
+  <li>
+    <%= link_to 'Create a new job', new_job_path %>
+  </li>
+  <li>
+    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+  </li>
+</ul>

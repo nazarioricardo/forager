@@ -7,9 +7,23 @@
     </li>
   <% end %>
 </ul>
+
+<h2>Your Resumes</h2>
+<ul>
+  <% current_user.resumes.each do |resume| %>
+    <li>
+      <%= link_to resume.title, resume_path(resume) %>
+    </li>
+  <% end %>
+</ul>
+
+
 <ul>
   <li>
     <%= link_to 'Create a new job', new_job_path %>
+  </li>
+  <li>
+    <%= link_to 'Create a new resume', new_resume_path %>
   </li>
   <li>
     <%= link_to "Logout", destroy_user_session_path, method: :delete %>

@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'dashboard', to: 'dashboard#show'
   # Jobs
-  resources :jobs, only: [:new, :create, :show]
-  patch 'jobs/:id/update_resume', to: 'jobs#update_resume', as: 'update_job_resume'
+  resources :jobs, only: [:new, :create, :show, :update]
 
   # Resumes
   resources :resumes, only: [:new, :create, :show]

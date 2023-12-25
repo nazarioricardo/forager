@@ -20,25 +20,19 @@ class JobsController < ApplicationController
     @letters = Letter.all
   end
 
+  def edit
+    @job = Job.find(params[:id])
+    @resumes = Resume.all
+  end
+
   def update
     @job = Job.find(params[:id])
     if @job.update(job_params)
       redirect_to @job
     else
-      render :edit
+      render :show
     end
   end
-
-  
-  def update_resume
-    @job = Job.find(params[:id])
-    if @job.update(resume_id: params[:resume_id])
-      redirect_to @job
-    else
-      render :edit
-    end
-  end
-
 
   private
 

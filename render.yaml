@@ -1,6 +1,6 @@
 databases:
   - name: forager
-    databaseName: forager-db
+    databaseName: forager
     user: forager
     plan: free
 

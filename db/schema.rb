@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2023_12_24_224921) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -44,9 +47,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_24_224921) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.integer "resume_id"
-    t.integer "letter_id"
+    t.bigint "user_id", null: false
+    t.bigint "resume_id"
+    t.bigint "letter_id"
     t.index ["letter_id"], name: "index_jobs_on_letter_id"
     t.index ["resume_id"], name: "index_jobs_on_resume_id"
     t.index ["user_id"], name: "index_jobs_on_user_id"
@@ -55,7 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_24_224921) do
   create_table "letters", force: :cascade do |t|
     t.string "title"
     t.string "subtitle"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_letters_on_user_id"
@@ -66,7 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_24_224921) do
     t.string "subtitle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_resumes_on_user_id"
   end
 

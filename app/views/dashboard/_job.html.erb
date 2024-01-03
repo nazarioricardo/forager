@@ -1,0 +1,14 @@
+<div class="border-2 flex flex-col">
+  <%= render 'application/link', text: job.title, path: job_path(job) %>
+  <% if job.resume %>
+      <p>(Resume: <%= render 'application/link', text: job.resume.title, path: resume_path(job.resume) %>)</p>
+    <% else %>
+      <p>(No Resume Selected)</p>
+    <% end %>
+
+    <% if job.letter %>
+      <p>(Letter: <%= render 'application/link', text: job.letter.title, path: resume_path(job.letter) %>)</p>
+    <% else %>
+      <p>(No Letter Selected)</p>
+  <% end %>
+</div>

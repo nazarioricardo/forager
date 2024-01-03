@@ -1,20 +1,9 @@
 <h1 class="text-4xl font-bold underline">Welcome Home, <%= current_user.email %></h1>
-<h2 class="font-bold">Your Jobs</h2>
+<h2 class="text-xl font-bold underline">Your Jobs</h2>
 <ul>
   <% current_user.jobs.each do |job| %>
     <li>
-      <%= link_to job.title, job_path(job) %>
-      <% if job.resume %>
-        (Resume: <%= link_to job.resume.title, resume_path(job.resume) %>)
-      <% else %>
-        (No Resume Selected)
-      <% end %>
-
-      <% if job.letter %>
-        (Letter: <%= link_to job.letter.title, resume_path(job.letter) %>)
-      <% else %>
-        (No Letter Selected)
-      <% end %>
+      <%= render 'job', job: job %>
     </li>
   <% end %>
 </ul>
@@ -23,7 +12,7 @@
 <ul>
   <% current_user.resumes.each do |resume| %>
     <li>
-      <%= link_to resume.title, resume_path(resume) %>
+      <%= render 'application/link', text: resume.title, path: resume_path(resume) %>
     </li>
   <% end %>
 </ul>
@@ -32,7 +21,7 @@
 <ul>
   <% current_user.letters.each do |letter| %>
     <li>
-      <%= link_to letter.title, letter_path(letter) %>
+      <%= render 'application/link', text: letter.title, path: letter_path(letter) %>
     </li>
   <% end %> 
 </ul>

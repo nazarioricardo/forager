@@ -2,13 +2,11 @@
 <h2 class="text-xl font-bold underline">Your Jobs</h2>
 <ul>
   <% current_user.jobs.each do |job| %>
-    <li>
-      <%= render 'job', job: job %>
-    </li>
+    <%= render 'job', job: job %>
   <% end %>
 </ul>
 
-<h2>Your Resumes</h2>
+<h2 class="text-xl font-bold underline">Your Resumes</h2>
 <ul>
   <% current_user.resumes.each do |resume| %>
     <li>
@@ -17,7 +15,7 @@
   <% end %>
 </ul>
 
-<h2>Your Letters</h2>
+<h2 class="text-xl font-bold underline">Your Letters</h2>
 <ul>
   <% current_user.letters.each do |letter| %>
     <li>

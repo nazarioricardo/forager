@@ -1,12 +1,11 @@
 <h1><%= @job.title %></h1>
 <%= render 'application/link', text: "To Dashboard", path: dashboard_path %>
 
+<h2>Resume:</h2>
 <% if @job.resume %>
-  <h2>Resume: <%= @job.resume.title %></h2>
   <%= form_with model: @job, local: true do |form| %>
-    <%= form.label :resume_id, "Resume" %>
     <%= form.collection_select :resume_id, @resumes, :id, :title %>
-    <%= form.submit "Update" %>
+    <%= form.submit "Update Resume" %>
   <% end %>
 <% else %>
   <%= form_with model: @job, local: true do |form| %>
@@ -15,10 +14,9 @@
   <% end %>
 <% end %>
 
+<h2>Cover Letter:</h2>
 <% if @job.letter %>
-  <h2>Cover Letter: <%= @job.letter.title %></h2>
   <%= form_with model: @job, local: true do |form| %>
-    <%= form.label :letter_id, "Cover Letter" %>
     <%= form.collection_select :letter_id, @letters, :id, :title %>
     <%= form.submit 'Update Letter' %>
   <% end %>

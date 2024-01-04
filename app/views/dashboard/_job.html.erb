@@ -7,7 +7,7 @@
     <% end %>
 
     <% if job.letter %>
-      <p>(Letter: <%= render 'application/link', text: job.letter.title, path: resume_path(job.letter) %>)</p>
+      <p>(Letter: <%= render 'application/link', text: job.letter.title, path: letter_path(job.letter) %>)</p>
     <% else %>
       <p>(No Letter Selected)</p>
   <% end %>

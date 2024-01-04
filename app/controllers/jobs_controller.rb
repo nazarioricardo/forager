@@ -23,13 +23,20 @@ class JobsController < ApplicationController
   def edit
     @job = Job.find(params[:id])
     @resumes = Resume.all
+    @letters = Letter.all
   end
 
   def update
+    print "updating ", params, "\n"
     @job = Job.find(params[:id])
+    print "found job ", @job, "\n"
     if @job.update(job_params)
+      print "updated job ", @job, "\n"
       redirect_to @job
     else
+      print "failed to update job ", @job.errors.full_messages, "\n"
+      @resumes = Resume.all
+      @letters = Letter.all
       render :show
     end
   end
@@ -37,6 +44,6 @@ class JobsController < ApplicationController
   private
 
   def job_params
-    params.require(:job).permit(:title, :description, :resume_id, :letter_id)
+    params.require(:job).permit(:title, :description, :resume_id, :letter_id, :status, :link)
   end
 end

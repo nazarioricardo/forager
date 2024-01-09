@@ -1,10 +1,19 @@
 <h1 class="text-4xl font-bold underline">Welcome Home, <%= current_user.email %></h1>
 <h2 class="text-xl font-bold underline">Your Jobs</h2>
-<ul>
-  <% current_user.jobs.each do |job| %>
-    <%= render 'job', job: job %>
+<div class="flex justify-between">
+  <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
+    <div class="flex flex-1 flex-col">
+      <h2 class="text-xl font-bold underline"><%= status.capitalize %></h2>
+      <ul>
+        <% current_user.jobs.where(status: status).each do |job| %>
+          <li>
+            <%= render 'job', job: job %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
-</ul>
+</div>
 
 <h2 class="text-xl font-bold underline">Your Resumes</h2>
 <ul>

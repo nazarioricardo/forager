@@ -7,4 +7,12 @@ class Job < ApplicationRecord
   belongs_to :letter, optional: true
 
   enum status: { created: 0, applied: 1, interviewing: 2, done: 3 }
+
+  before_create :set_default_status
+
+  private
+
+  def set_default_status
+    self.status ||= :created
+  end
 end

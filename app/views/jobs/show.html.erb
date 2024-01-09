@@ -1,5 +1,13 @@
 <h1><%= @job.title %></h1>
+<p><%= @job.created_at.strftime('%m/%d/%Y') %></p>
+
 <%= render 'application/link', text: "To Dashboard", path: dashboard_path %>
+
+<h2>Status:</h2>
+<%= form_with model: @job, local: true do |form| %>
+  <%= form.select :status, Job.statuses.keys.map { |status| [status.humanize, status] } %>
+  <%= form.submit 'Update Status' %>
+<% end %>
 
 <h2>Resume:</h2>
 <% if @job.resume %>

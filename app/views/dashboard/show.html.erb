@@ -4,11 +4,9 @@
   <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
     <div class="flex flex-1 flex-col">
       <h2 class="text-xl font-bold underline"><%= status.capitalize %></h2>
-      <ul>
+      <ul class="job-status" id=<%= status %>>
         <% current_user.jobs.where(status: status).order(created_at: :desc).each do |job| %>
-          <li>
-            <%= render 'job', job: job %>
-          </li>
+          <%= render 'job', job: job %>
         <% end %>
       </ul>
     </div>

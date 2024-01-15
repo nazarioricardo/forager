@@ -6,10 +6,21 @@ const initSortable = (elements) => {
         group: 'shared', // set both lists to same group
         animation: 300,
         onEnd: function (evt) {
-          var jobId = evt.item.id; // assumes each job item has an id attribute with the job's id
+          var jobId = evt.item.dataset.id; // assumes each job item has a data-id attribute with the job's id
           var newStatus = evt.to.id;
-          // TODO: make an AJAX request to update the job's status
-          console.log(evt.item, evt.to)
+
+          console.log(jobId, newStatus)
+          fetch(`/jobs/${jobId}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ status: newStatus }),
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
         },
       });
   });

@@ -27,17 +27,11 @@ class JobsController < ApplicationController
   end
 
   def update
-    print "updating ", params, "\n"
     @job = Job.find(params[:id])
-    print "found job ", @job, "\n"
     if @job.update(job_params)
-      print "updated job ", @job, "\n"
-      redirect_to @job
+      head :ok
     else
-      print "failed to update job ", @job.errors.full_messages, "\n"
-      @resumes = Resume.all
-      @letters = Letter.all
-      render :show
+      head :unprocessable_entity
     end
   end
 

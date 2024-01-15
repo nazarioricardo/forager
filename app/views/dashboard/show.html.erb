@@ -1,12 +1,12 @@
 <h1 class="">Welcome Home, <%= current_user.email %></h1>
 <h2 class="">Your Jobs</h2>
-<div class="">
+<div class="board">
   <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
-    <div class="">
+    <div class="status">
       <h2 class=""><%= status.capitalize %></h2>
-      <ul class="job-status" id=<%= status %>>
+      <ul class="status-list" id=<%= status %>>
         <% current_user.jobs.where(status: status).order(created_at: :desc).each do |job| %>
-          <%= render 'job', job: job %>
+          <%= render 'job_card', job: job %>
         <% end %>
       </ul>
     </div>

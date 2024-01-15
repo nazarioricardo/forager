@@ -1,4 +1,4 @@
-<li class="" data-id=<%= job.id %>>
+<li class="card grabbable" data-id=<%= job.id %>>
   <p><%= link_to job.title, job_path(job) %></p>
   <% if job.resume %>
       <p>(Resume: <%= link_to job.resume.title, resume_path(job.resume) %>)</p>

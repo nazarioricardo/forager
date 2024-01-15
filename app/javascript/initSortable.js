@@ -5,11 +5,11 @@ const initSortable = (elements) => {
     new Sortable(ul, {
         group: 'shared', // set both lists to same group
         animation: 300,
+        forceFallback: true,
         onEnd: function (evt) {
           var jobId = evt.item.dataset.id; // assumes each job item has a data-id attribute with the job's id
           var newStatus = evt.to.id;
 
-          console.log(jobId, newStatus)
           fetch(`/jobs/${jobId}`, {
             method: 'PUT',
             headers: {

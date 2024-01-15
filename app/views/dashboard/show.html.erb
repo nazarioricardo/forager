@@ -1,9 +1,9 @@
-<h1 class="text-4xl font-bold underline">Welcome Home, <%= current_user.email %></h1>
-<h2 class="text-xl font-bold underline">Your Jobs</h2>
-<div class="flex justify-between">
+<h1 class="">Welcome Home, <%= current_user.email %></h1>
+<h2 class="">Your Jobs</h2>
+<div class="">
   <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
-    <div class="flex flex-1 flex-col">
-      <h2 class="text-xl font-bold underline"><%= status.capitalize %></h2>
+    <div class="">
+      <h2 class=""><%= status.capitalize %></h2>
       <ul class="job-status" id=<%= status %>>
         <% current_user.jobs.where(status: status).order(created_at: :desc).each do |job| %>
           <%= render 'job', job: job %>
@@ -13,7 +13,7 @@
   <% end %>
 </div>
 
-<h2 class="text-xl font-bold underline">Your Resumes</h2>
+<h2 class="">Your Resumes</h2>
 <ul>
   <% current_user.resumes.each do |resume| %>
     <li>
@@ -22,7 +22,7 @@
   <% end %>
 </ul>
 
-<h2 class="text-xl font-bold underline">Your Letters</h2>
+<h2 class="">Your Letters</h2>
 <ul>
   <% current_user.letters.each do |letter| %>
     <li>

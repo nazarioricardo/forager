@@ -1,5 +1,6 @@
 <h1 class="">Welcome Home, <%= current_user.email %></h1>
 <h2 class="">Your Jobs</h2>
+<%= link_to 'Create a new job', new_job_path %>
 <div class="board">
   <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
     <div class="status">
@@ -16,6 +17,8 @@
 </div>
 
 <h2 class="">Your Resumes</h2>
+  <%= link_to 'Create a new resume', new_resume_path %>
+
 <ul>
   <% current_user.resumes.each do |resume| %>
     <li>
@@ -25,6 +28,7 @@
 </ul>
 
 <h2 class="">Your Letters</h2>
+<%= link_to 'Create a new letter', new_letter_path %>
 <ul>
   <% current_user.letters.each do |letter| %>
     <li>
@@ -33,18 +37,5 @@
   <% end %> 
 </ul>
 
-
-<ul>
-  <li>
-    <%= link_to 'Create a new job', new_job_path %>
-  </li>
-  <li>
-    <%= link_to 'Create a new resume', new_resume_path %>
-  </li>
-  <li>
-    <%= link_to 'Create a new letter', new_letter_path %>
-  </li>
-  <li>
-    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-  </li>
-</ul>
+<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+  

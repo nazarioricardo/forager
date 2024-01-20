@@ -1,4 +1,5 @@
 <li class="card grabbable" data-id=<%= job.id %>>
+<div class="job-card-content">
   <p><%= link_to job.title, job_path(job) %></p>
   <% if job.resume %>
       <p>(Resume: <%= link_to job.resume.title, resume_path(job.resume) %>)</p>
@@ -12,4 +13,5 @@
       <p>(No Letter Selected)</p>
   <% end %>
   <p><%= job.created_at.strftime('%m/%d/%Y') %></p>
+  </div>
 </li>

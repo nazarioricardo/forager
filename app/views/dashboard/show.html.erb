@@ -1,10 +1,5 @@
-<% content_for :head do %>
-  <!-- header content specific to this payment page -->
-  <script src="https://js.stripe.com/v3/"></script>
-<% end %>
-
-<h1 class="">Welcome Home, <%= current_user.email %></h1>
-<h2 class="">Your Jobs</h2>
+<h1>Welcome Home, <%= current_user.email %></h1>
+<h2>Your Jobs</h2>
 <%= link_to 'Create a new job', new_job_path %>
 <div class="board-container">
   <div class="board">

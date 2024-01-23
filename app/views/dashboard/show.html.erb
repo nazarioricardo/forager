@@ -8,13 +8,14 @@
         <div class="title-card">
           <h2 class="status-title"><%= status.capitalize %></h2>
         </div>
-
+        <div class="space"></div>
         <ul class="job-list" id=<%= status %>>
           <% current_user.jobs.where(status: status).order(created_at: :desc).each do |job| %>
             <%= render 'job_card', job: job %>
           <% end %>
         </ul>
       </div>
+
     <% end %>
   </div>
 </div>

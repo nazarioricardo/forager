@@ -1,19 +1,27 @@
+<% content_for :head do %>
+  <!-- header content specific to this payment page -->
+  <script src="https://js.stripe.com/v3/"></script>
+<% end %>
+
 <h1 class="">Welcome Home, <%= current_user.email %></h1>
 <h2 class="">Your Jobs</h2>
 <%= link_to 'Create a new job', new_job_path %>
-<div class="board">
-  <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
-    <div class="status">
-      <div class="status-title-container">
-        <h2 class="status-title"><%= status.capitalize %></h2>
+<div class="board-container">
+  <div class="board">
+    <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
+      <div class="status">
+        <div class="title-card">
+          <h2 class="status-title"><%= status.capitalize %></h2>
+        </div>
+
+        <ul class="job-list" id=<%= status %>>
+          <% current_user.jobs.where(status: status).order(created_at: :desc).each do |job| %>
+            <%= render 'job_card', job: job %>
+          <% end %>
+        </ul>
       </div>
-      <ul class="status-list" id=<%= status %>>
-        <% current_user.jobs.where(status: status).order(created_at: :desc).each do |job| %>
-          <%= render 'job_card', job: job %>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
 <h2 class="">Your Resumes</h2>

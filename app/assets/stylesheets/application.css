@@ -18,14 +18,30 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
- }
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.board-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e1e3ec;
+  /* background-color: yellow; */
+  /* min-height: 100vh; */
+  width: 100vw;
+
+}
 
 .board {
   display: flex;
   flex-direction: row;
   min-height: 60vh;
   width: 100vw;
-  background-color: red;
+  min-width: 48em;
+  max-width: 64em;
+  gap: 1rem;
+  padding: 24px
 }
 
 .status {
@@ -34,21 +50,28 @@
   justify-content: flex-start;
   align-items: center;
   width: 25%;
-  border: black 1px solid;
-  background-color: blue;
+  /* border: black 1px solid; */
+  /* background-color: blue; */
+  /* overflow: hidden; */
 }
 
-.status-title-container {
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-background-color: green;
-height: 100px;
-width: 100%;
+.status > .title-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  height: 100px;
+  width: 100%;
+  border-radius: 24px;
 }
 
-.status-list {
+.status > .space {
+  height: 1rem;
+  width: 100%;
+}
+
+.status > .job-list {
   list-style: none;
   padding: 0;
   display: flex;
@@ -57,10 +80,11 @@ width: 100%;
   align-items: flex-start;
   width: 100%;
   height: 100%;
+  gap: 0.7rem;
   background-color: lightblue;
 }
 
-.job-card-content {
+.job-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -92,3 +116,15 @@ width: 100%;
   cursor: -webkit-grabbing;
   background-color: #b9b9b9;
 }
+
+/* Small devices such as large phones (640px and up) */
+@media only screen and (min-width: 40em) {}
+
+/* Medium devices such as tablets (768px and up) */
+@media only screen and (min-width: 48em) {}
+
+/* Large devices such as laptops (1024px and up) */
+@media only screen and (min-width: 64em) {}
+
+/* Largest devices such as desktops (1280px and up) */
+@media only screen and (min-width: 80em) {}

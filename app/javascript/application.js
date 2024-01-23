@@ -6,7 +6,7 @@ import { initSortable } from "./initSortable";
 console.log("hello?")
 document.addEventListener('turbo:load', () => {
   console.log('hello')
-  const statusUls = document.querySelectorAll(".status-list");
+  const statusUls = document.querySelectorAll(".job-list");
   console.log('uls', statusUls)
   if (statusUls) {
     initSortable(statusUls);

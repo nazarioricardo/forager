@@ -1,17 +1,17 @@
 <li class="card grabbable" data-id=<%= job.id %>>
-<div class="job-content">
-  <p><%= link_to job.title, job_path(job) %></p>
-  <% if job.resume %>
-      <p>(Resume: <%= link_to job.resume.title, resume_path(job.resume) %>)</p>
-    <% else %>
-      <p>(No Resume Selected)</p>
-    <% end %>
+  <section class="job-content">
+    <p><%= link_to job.title, job_path(job) %></p>
+    <% if job.resume %>
+        <p>(Resume: <%= link_to job.resume.title, resume_path(job.resume) %>)</p>
+      <% else %>
+        <p>(No Resume Selected)</p>
+      <% end %>
 
-    <% if job.letter %>
-      <p>(Letter: <%= link_to job.letter.title, letter_path(job.letter) %>)</p>
-    <% else %>
-      <p>(No Letter Selected)</p>
-  <% end %>
-  <p><%= job.created_at.strftime('%m/%d/%Y') %></p>
-  </div>
+      <% if job.letter %>
+        <p>(Letter: <%= link_to job.letter.title, letter_path(job.letter) %>)</p>
+      <% else %>
+        <p>(No Letter Selected)</p>
+    <% end %>
+    <p><%= job.created_at.strftime('%m/%d/%Y') %></p>
+  </section>
 </li>

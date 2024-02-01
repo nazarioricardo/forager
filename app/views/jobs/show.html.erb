@@ -1,39 +1,49 @@
-<h1><%= @job.title %></h1>
-<p><%= @job.created_at.strftime('%m/%d/%Y') %></p>
+<section>
+  <h1><%= @job.title %></h1>
+  <p><%= @job.created_at.strftime('%m/%d/%Y') %></p>
+</section>
 
 <%= link_to "To Dashboard", dashboard_path %>
 
-<h2>Status:</h2>
-<%= form_with model: @job, local: true do |form| %>
-  <%= form.select :status, Job.statuses.keys.map { |status| [status.humanize, status] } %>
-  <%= form.submit 'Update Status' %>
-<% end %>
+<section>
+  <h2>Status:</h2>
+  <%= form_with model: @job, local: true do |form| %>
+    <%= form.select :status, Job.statuses.keys.map { |status| [status.humanize, status] } %>
+    <%= form.submit 'Update Status' %>
+  <% end %>
+</section>
 
-<h2>Resume:</h2>
-<% if @job.resume %>
-  <%= form_with model: @job, local: true do |form| %>
-    <%= form.collection_select :resume_id, @resumes, :id, :title %>
-    <%= form.submit "Update Resume" %>
+<section>
+  <h2>Resume:</h2>
+  <% if @job.resume %>
+    <%= form_with model: @job, local: true do |form| %>
+      <%= form.collection_select :resume_id, @resumes, :id, :title %>
+      <%= form.submit "Update Resume" %>
+    <% end %>
+  <% else %>
+    <%= form_with model: @job, local: true do |form| %>
+      <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
+      <%= form.submit 'Add Resume' %>
+    <% end %>
   <% end %>
-<% else %>
-  <%= form_with model: @job, local: true do |form| %>
-    <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
-    <%= form.submit 'Add Resume' %>
-  <% end %>
-<% end %>
+</section>
 
-<h2>Cover Letter:</h2>
-<% if @job.letter %>
-  <%= form_with model: @job, local: true do |form| %>
-    <%= form.collection_select :letter_id, @letters, :id, :title %>
-    <%= form.submit 'Update Letter' %>
+<section>
+  <h2>Cover Letter:</h2>
+  <% if @job.letter %>
+    <%= form_with model: @job, local: true do |form| %>
+      <%= form.collection_select :letter_id, @letters, :id, :title %>
+      <%= form.submit 'Update Letter' %>
+    <% end %>
+  <% else %>
+    <%= form_with model: @job, local: true do |form| %>
+      <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
+      <%= form.submit 'Add Letter' %>
+    <% end %>
   <% end %>
-<% else %>
-  <%= form_with model: @job, local: true do |form| %>
-    <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
-    <%= form.submit 'Add Letter' %>
-  <% end %>
-<% end %>
+</section>
 
-<p><%= simple_format(@job.description) %></p>
+<section>
+  <p><%= simple_format(@job.description) %></p>
+</section>
 

@@ -1,45 +1,50 @@
 <h1>Welcome Home, <%= current_user.email %></h1>
-<h2>Your Jobs</h2>
-<%= link_to 'Create a new job', new_job_path %>
-<div class="board-container">
-  <div class="board">
-    <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
-      <div class="status">
-        <div class="title-card">
-          <h2 class="status-title"><%= status.capitalize %></h2>
+<section>
+  <h2>Your Jobs</h2>
+  <%= link_to 'Create a new job', new_job_path %>
+  <section class="board-container">
+    <div class="board">
+      <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
+        <div class="status">
+          <div class="title-card">
+            <h2 class="status-title"><%= status.capitalize %></h2>
+          </div>
+          <div class="space"></div>
+          <ul class="job-list" id=<%= status %>>
+            <% current_user.jobs.where(status: status).order(created_at: :desc).each do |job| %>
+              <%= render 'job_card', job: job %>
+            <% end %>
+          </ul>
         </div>
-        <div class="space"></div>
-        <ul class="job-list" id=<%= status %>>
-          <% current_user.jobs.where(status: status).order(created_at: :desc).each do |job| %>
-            <%= render 'job_card', job: job %>
-          <% end %>
-        </ul>
-      </div>
+      <% end %>
+    </div> 
+  </section>
+</section>
 
+<section>
+  <h2 class="">Your Resumes</h2>
+  <%= link_to 'Create a new resume', new_resume_path %>
+  <ul>
+    <% current_user.resumes.each do |resume| %>
+      <li>
+        <%= link_to resume.title, resume_path(resume) %>
+      </li>
     <% end %>
-  </div>
-</div>
+  </ul>
+</section>
 
-<h2 class="">Your Resumes</h2>
-<%= link_to 'Create a new resume', new_resume_path %>
 
-<ul>
-  <% current_user.resumes.each do |resume| %>
-    <li>
-      <%= link_to resume.title, resume_path(resume) %>
-    </li>
-  <% end %>
-</ul>
-
-<h2 class="">Your Letters</h2>
-<%= link_to 'Create a new letter', new_letter_path %>
-<ul>
-  <% current_user.letters.each do |letter| %>
-    <li>
-      <%= link_to letter.title, letter_path(letter) %>
-    </li>
-  <% end %> 
-</ul>
+<section>
+  <h2 class="">Your Letters</h2>
+  <%= link_to 'Create a new letter', new_letter_path %>
+  <ul>
+    <% current_user.letters.each do |letter| %>
+      <li>
+        <%= link_to letter.title, letter_path(letter) %>
+      </li>
+    <% end %> 
+  </ul>
+</section>
 
 <%= link_to "Logout", destroy_user_session_path, method: :delete %>
   

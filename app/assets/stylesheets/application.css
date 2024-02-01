@@ -14,27 +14,46 @@
  *= require_self
  */
 
- * {
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+body {
+  width: 100vw;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+section.content {
+  width: 900px;
+  margin: 0 24px;
+  padding-bottom: 32px;
 }
 
 .board-container {
+  position: relative;
+  padding-top: 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .board {
   display: flex;
   flex-direction: row;
   min-height: 60vh;
-  width: 100vw;
+  width: 100%;
   min-width: 48em;
   max-width: 64em;
   padding: 1rem 0.5rem;
@@ -48,8 +67,7 @@
   justify-content: flex-start;
   align-items: center;
   width: 25%;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding: 0 0.5rem;
 }
 
 .status:not(:last-child) {
@@ -89,7 +107,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  min-height: 100px
+  min-height: 100px;
 }
 
 .card {
@@ -101,7 +119,7 @@
   position: relative;
   width: 100%;
   margin: 0;
-  overflow: hidden
+  overflow: hidden;
 }
 
 .grabbable {
@@ -117,10 +135,12 @@
 }
 
 /* Small devices such as large phones (640px and up) */
-@media only screen and (max-width: 40em) {}
+@media only screen and (max-width: 40em) {
+}
 
 /* Medium devices such as tablets (768px and up) */
-@media only screen and (max-width: 48em) {}
+@media only screen and (max-width: 48em) {
+}
 
 /* Large devices such as laptops (1024px and up) */
 @media only screen and (max-width: 64em) {
@@ -130,4 +150,5 @@
 }
 
 /* Largest devices such as desktops (1280px and up) */
-@media only screen and (max-width: 80em) {}
+@media only screen and (max-width: 80em) {
+}

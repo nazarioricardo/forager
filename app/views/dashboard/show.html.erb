@@ -6,10 +6,7 @@
     <div class="board">
       <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
         <div class="status">
-          <div class="title-card">
-            <h2 class="status-title"><%= status.capitalize %></h2>
-          </div>
-          <div class="space"></div>
+          <h3><%= status.capitalize %></h3>
           <ul class="job-list" id=<%= status %>>
             <% current_user.jobs.where(status: status).order(created_at: :desc).each do |job| %>
               <%= render 'job_card', job: job %>

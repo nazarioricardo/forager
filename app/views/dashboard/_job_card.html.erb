@@ -1,4 +1,6 @@
-<li class="card grabbable" data-id=<%= job.id %>>
+<%= stylesheet_link_tag 'job_card', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<li class="item grabbable" data-id=<%= job.id %>>
   <section class="job-content">
     <p><%= link_to job.title, job_path(job) %></p>
     <% if job.resume %>

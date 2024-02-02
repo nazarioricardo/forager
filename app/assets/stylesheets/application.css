@@ -42,58 +42,6 @@ section.content {
   padding-bottom: 32px;
 }
 
-.board-container {
-  position: relative;
-  padding-top: 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.board {
-  display: flex;
-  flex-direction: row;
-  min-height: 60vh;
-  width: 100%;
-  min-width: 48em;
-  max-width: 64em;
-  padding: 1rem 0.5rem;
-  border-radius: 36px;
-}
-
-.board > .status {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 25%;
-  gap: 24px;
-}
-
-.status > .job-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: 100%;
-  gap: 0.3rem;
-}
-
-.job-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  min-height: 100px;
-}
-
 .item {
   position: relative;
   display: inline-block;
@@ -129,9 +77,6 @@ section.content {
 
 /* Large devices such as laptops (1024px and up) */
 @media only screen and (max-width: 64em) {
-  .board-container {
-    align-items: flex-start;
-  }
 }
 
 /* Largest devices such as desktops (1280px and up) */

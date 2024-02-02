@@ -1,0 +1,52 @@
+.board-container {
+  position: relative;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.board {
+  display: flex;
+  flex-direction: row;
+  min-height: 60vh;
+  width: 100%;
+  min-width: 48em;
+  max-width: 64em;
+  /* padding: 1rem 0.5rem; */
+  border-radius: 36px;
+  gap: 12px;
+}
+
+.board > .status {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 25%;
+  gap: 12px;
+}
+
+.status > .job-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  gap: 12px;
+}
+
+.job-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 100px;
+}

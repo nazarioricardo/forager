@@ -1,4 +1,4 @@
-<h1>Welcome Home, <%= current_user.email %></h1>
+<%= stylesheet_link_tag 'dashboard', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <section class="content">
 <%= render 'header_bar', title: "Jobs", action_label: "New Job", action_route: new_job_path %>
@@ -18,28 +18,27 @@
   </section>
 </section>
 
-<section class="content">
-  <h2 class="">Your Resumes</h2>
-  <%= link_to 'Create a new resume', new_resume_path %>
-  <ul>
-    <% current_user.resumes.each do |resume| %>
-      <li>
-        <%= link_to resume.title, resume_path(resume) %>
-      </li>
-    <% end %>
-  </ul>
-</section>
+<section class="files-section">
+  <section class="content">
+    <%= render 'header_bar', title: "Resumes", action_label: "New Resume", action_route: new_resume_path %>
+    <ul>
+      <% current_user.resumes.each do |resume| %>
+        <li>
+          <%= link_to resume.title, resume_path(resume) %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
 
-
-<section class="content">
-  <h2 class="">Your Letters</h2>
-  <%= link_to 'Create a new letter', new_letter_path %>
-  <ul>
-    <% current_user.letters.each do |letter| %>
-      <li>
-        <%= link_to letter.title, letter_path(letter) %>
-      </li>
-    <% end %> 
-  </ul>
+  <section class="content">
+    <%= render 'header_bar', title: "Letters", action_label: "New Letter", action_route: new_letter_path %>
+    <ul>
+      <% current_user.letters.each do |letter| %>
+        <li>
+          <%= link_to letter.title, letter_path(letter) %>
+        </li>
+      <% end %> 
+    </ul>
+  </section>
 </section>
   

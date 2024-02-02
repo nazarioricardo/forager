@@ -16,6 +16,7 @@
 
 :root {
   --surface-color: #e6e8ec;
+  --surface-hover-color: #dfe2e7;
 }
 
 * {
@@ -107,13 +108,15 @@ section.content {
 .grabbable {
   cursor: grab;
   cursor: -webkit-grab;
-  box-shadow: #9e9e9e 0px 1px 5px 0px;
+}
+
+.grabbable:hover {
+  background-color: var(--surface-hover-color);
 }
 
 .grabbable:active {
   cursor: grabbing;
   cursor: -webkit-grabbing;
-  background-color: #e6e6e6;
 }
 
 /* Small devices such as large phones (640px and up) */

@@ -19,18 +19,18 @@
 </section>
 
 <section class="content files">
-  <section class="files-section">
+  <section class="files_section">
     <%= render 'header_bar', title: "Resumes", action_label: "New Resume", action_route: new_resume_path %>
-    <ul>
+    <ul class="files_list">
       <% current_user.resumes.each do |resume| %>
         <%= render 'file_item', title: resume.title, item_path: resume_path(resume) %>
       <% end %>
     </ul>
   </section>
 
-  <section class="files-section">
+  <section class="files_section">
     <%= render 'header_bar', title: "Letters", action_label: "New Letter", action_route: new_letter_path %>
-    <ul>
+    <ul class="files_list">
       <% current_user.letters.each do |letter| %>
         <%= render 'file_item', title: letter.title, item_path: letter_path(letter) %>
       <% end %> 

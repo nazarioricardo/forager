@@ -1,0 +1,12 @@
+<%= stylesheet_link_tag 'navbar', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<nav>
+  <%= link_to 'Home', root_path %>
+  <div>
+    <% if user_signed_in? %>
+      <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %>
+    <% else %>
+      <%= link_to 'Sign in', new_user_session_path %>
+    <% end %>
+  </div>
+</nav>

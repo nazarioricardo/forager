@@ -1,8 +1,7 @@
 <h1>Welcome Home, <%= current_user.email %></h1>
 
 <section class="content">
-  <h2>Your Jobs</h2>
-  <%= link_to 'Create a new job', new_job_path %>
+<%= render 'header_bar', title: "Jobs", action_label: "New Job", action_route: new_job_path %>
   <section class="board-container">
     <div class="board">
       <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
@@ -46,6 +45,4 @@
     <% end %> 
   </ul>
 </section>
-
-<%= link_to "Logout", destroy_user_session_path, method: :delete %>
   

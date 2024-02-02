@@ -7,3 +7,17 @@ nav {
   align-items: center;
   padding: 0 128px;
 }
+
+.auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.auth > span {
+  position: absolute;
+  top: 24px;
+  opacity: 0.5;
+  font-size: 0.6rem;
+}

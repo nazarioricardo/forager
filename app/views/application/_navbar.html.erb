@@ -2,11 +2,14 @@
 
 <nav>
   <%= link_to 'Home', root_path %>
-  <div>
+
     <% if user_signed_in? %>
-      <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %>
+      <div class="auth">
+        <span class="user-info"><%= current_user.email %></span>
+        <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %>
+      </div>
     <% else %>
       <%= link_to 'Sign in', new_user_session_path %>
     <% end %>
-  </div>
+
 </nav>

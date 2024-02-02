@@ -42,3 +42,16 @@
   height: 100%;
   gap: 12px;
 }
+
+.files {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 24px;
+}
+
+.files-section {
+  width: 100%;
+}

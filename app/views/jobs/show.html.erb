@@ -1,5 +1,9 @@
 <section>
-  <h1><%= @job.title %></h1>
+  <% if @job.link.present? %>
+    <h1><%= link_to @job.title, @job.link %></h1>
+  <% else %>
+    <h1><%= @job.title %></h1>
+  <% end %>
   <p><%= @job.created_at.strftime('%m/%d/%Y') %></p>
 </section>
 
@@ -14,12 +18,18 @@
 </section>
 
 <section>
+  <%= link_to 'Download Documents', download_job_path(@job) %>
+</section>
+
+<section>
   <h2>Resume:</h2>
   <% if @job.resume %>
     <%= form_with model: @job, local: true do |form| %>
       <%= form.collection_select :resume_id, @resumes, :id, :title %>
       <%= form.submit "Update Resume" %>
     <% end %>
+
+    <%= link_to "Download Resume", url_for(@job.resume.pdf), target: "_blank" if @job.resume.pdf.attached? %>
   <% else %>
     <%= form_with model: @job, local: true do |form| %>
       <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
@@ -35,6 +45,7 @@
       <%= form.collection_select :letter_id, @letters, :id, :title %>
       <%= form.submit 'Update Letter' %>
     <% end %>
+    <%= link_to "Download Letter", url_for(@job.letter.pdf), target: "_blank" if @job.letter.pdf.attached? %>
   <% else %>
     <%= form_with model: @job, local: true do |form| %>
       <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>

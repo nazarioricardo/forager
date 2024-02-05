@@ -70,3 +70,4 @@ group :test do
 end
 
 gem "turbolinks"
+gem 'rubyzip'

@@ -1,3 +1,5 @@
+require 'zip'
+
 class JobsController < ApplicationController
   def new
     @job = Job.new
@@ -33,6 +35,26 @@ class JobsController < ApplicationController
     else
       head :unprocessable_entity
     end
+  end
+
+  def download
+    @job = Job.find(params[:id])
+  
+    zip_stream = Zip::OutputStream.write_buffer do |zip|
+      if @job.resume.pdf.attached?
+        zip.put_next_entry("#{@job.title} Resume.pdf")
+        zip.write @job.resume.pdf.download
+      end
+    
+      if @job.letter.pdf.attached?
+        zip.put_next_entry("#{@job.title} Letter.pdf")
+        zip.write @job.letter.pdf.download
+      end
+    end
+  
+    zip_stream.rewind
+    sanitized_title = @job.title.gsub(/[^0-9A-Za-z.\-]/, '_')
+    send_data zip_stream.read, filename: "#{sanitized_title} Documents.zip", type: 'application/zip'
   end
 
   private

@@ -36,14 +36,16 @@ body {
   align-items: center;
 }
 
-section.content {
-  width: 900px;
-  margin: 0 24px;
+section {
   padding-bottom: 18px;
 }
 
-section.content > form {
-  max-width: 450px;
+section.dashboard {
+  width: 900px;
+}
+
+section.content {
+  width: 500px;
 }
 
 .item {

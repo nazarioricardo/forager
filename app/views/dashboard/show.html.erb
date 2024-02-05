@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag 'dashboard', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <main>
-  <section class="content">
+  <section class="dashboard">
   <%= render 'header_bar', title: "Jobs", action_label: "New Job", action_route: new_job_path %>
     <section class="board-container">
       <div class="board">
@@ -19,7 +19,7 @@
     </section>
   </section>
 
-  <section class="content files">
+  <section class="dashboard files">
     <section class="files_section">
       <%= render 'header_bar', title: "Resumes", action_label: "New Resume", action_route: new_resume_path %>
       <ul class="files_list">

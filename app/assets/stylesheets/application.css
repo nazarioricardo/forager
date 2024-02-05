@@ -39,7 +39,11 @@ body {
 section.content {
   width: 900px;
   margin: 0 24px;
-  padding-bottom: 32px;
+  padding-bottom: 18px;
+}
+
+section.content > form {
+  max-width: 450px;
 }
 
 .item {

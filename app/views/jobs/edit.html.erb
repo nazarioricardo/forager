@@ -1,56 +1,66 @@
 <main>
-  <section>
+  <section class="content">
     <% if @job.link.present? %>
       <h1><%= link_to @job.title, @job.link %></h1>
     <% else %>
       <h1><%= @job.title %></h1>
     <% end %>
     <p><%= @job.created_at.strftime('%m/%d/%Y') %></p>
-    <%= link_to 'View Job', job_path(@job) %>
+    <%= link_to 'View', job_path(@job) %>
   </section>
 
-  <section>
-    <h2>Status:</h2>
+  <section class="content">
+    <h2>Status</h2>
     <%= form_with model: @job, local: true do |form| %>
-      <%= form.select :status, Job.statuses.keys.map { |status| [status.humanize, status] } %>
-      <%= form.submit 'Update Status' %>
+      <div class="field">
+        <%= form.select :status, Job.statuses.keys.map { |status| [status.humanize, status] } %>
+        <%= form.submit 'Update Status' %>
+      </div>
     <% end %>
   </section>
 
-  <section>
-    <h2>Resume:</h2>
+  <section class="content">
+    <h2>Resume</h2>
     <% if @job.resume %>
       <%= form_with model: @job, local: true do |form| %>
+      <div class="field">
         <%= form.collection_select :resume_id, @resumes, :id, :title %>
         <%= form.submit "Update Resume" %>
+      </div>
       <% end %>
 
       <%= link_to "Download Resume", url_for(@job.resume.pdf), target: "_blank" if @job.resume.pdf.attached? %>
     <% else %>
       <%= form_with model: @job, local: true do |form| %>
-        <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
-        <%= form.submit 'Add Resume' %>
+        <div class="field">
+          <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
+          <%= form.submit 'Add Resume' %>
+        </div>
       <% end %>
     <% end %>
   </section>
 
-  <section>
-    <h2>Cover Letter:</h2>
+  <section class="content">
+    <h2>Cover Letter</h2>
     <% if @job.letter %>
       <%= form_with model: @job, local: true do |form| %>
-        <%= form.collection_select :letter_id, @letters, :id, :title %>
-        <%= form.submit 'Update Letter' %>
+        <div class="field">
+          <%= form.collection_select :letter_id, @letters, :id, :title %>
+          <%= form.submit 'Update Letter' %>
+        </div>
       <% end %>
       <%= link_to "Download Letter", url_for(@job.letter.pdf), target: "_blank" if @job.letter.pdf.attached? %>
     <% else %>
       <%= form_with model: @job, local: true do |form| %>
+      <div class="field">
         <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
         <%= form.submit 'Add Letter' %>
+      </div>
       <% end %>
     <% end %>
   </section>
 
-  <section>
+  <section class="content">
     <p><%= simple_format(@job.description) %></p>
   </section>
 </main>

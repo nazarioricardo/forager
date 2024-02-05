@@ -1,54 +1,56 @@
-<section>
-  <% if @job.link.present? %>
-    <h1><%= link_to @job.title, @job.link %></h1>
-  <% else %>
-    <h1><%= @job.title %></h1>
-  <% end %>
-  <p><%= @job.created_at.strftime('%m/%d/%Y') %></p>
-  <%= link_to 'Edit Job', edit_job_path(@job) %>
-</section>
-
-<section>
-  <h2>Status:</h2>
-  <p><%= @job.status %></p>
-</section>
-
-<section>
-  <%= link_to 'Download Documents', download_job_path(@job) %>
-</section>
-
-<section>
-  <h2>Resume:</h2>
-  <% if @job.resume %>
-    <p><%= @job.resume.title %></p>
-    <%= link_to "View Resume", url_for(@job.resume.pdf), target: "_blank" if @job.resume.pdf.attached? %>
-  <% else %>
-    <%= form_with model: @job, local: true do |form| %>
-      <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
-      <%= form.submit 'Add Resume' %>
-      <p>or</p>
-      <%= link_to 'Create a New Resume', new_resume_path %>
+<main>
+  <section>
+    <% if @job.link.present? %>
+      <h1><%= link_to @job.title, @job.link %></h1>
+    <% else %>
+      <h1><%= @job.title %></h1>
     <% end %>
-  <% end %>
-</section>
+    <p><%= @job.created_at.strftime('%m/%d/%Y') %></p>
+    <%= link_to 'Edit Job', edit_job_path(@job) %>
+  </section>
 
-<section>
-  <h2>Cover Letter:</h2>
-  <% if @job.letter %>
-    <p><%= @job.letter.title %></p>
-    <%= link_to "View Letter", url_for(@job.letter.pdf), target: "_blank" if @job.letter.pdf.attached? %>
-  <% else %>
-    <%= form_with model: @job, local: true do |form| %>
-      <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
-      <%= form.submit 'Add Letter' %>
-      <p>or</p>
-      <%= link_to 'Create a New Letter', new_letter_path %>
+  <section>
+    <h2>Status:</h2>
+    <p><%= @job.status %></p>
+  </section>
+
+  <section>
+    <%= link_to 'Download Documents', download_job_path(@job) %>
+  </section>
+
+  <section>
+    <h2>Resume:</h2>
+    <% if @job.resume %>
+      <p><%= @job.resume.title %></p>
+      <%= link_to "View Resume", url_for(@job.resume.pdf), target: "_blank" if @job.resume.pdf.attached? %>
+    <% else %>
+      <%= form_with model: @job, local: true do |form| %>
+        <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
+        <%= form.submit 'Add Resume' %>
+        <p>or</p>
+        <%= link_to 'Create a New Resume', new_resume_path %>
+      <% end %>
     <% end %>
-  <% end %>
-</section>
+  </section>
 
-<section>
-  <h2>Description:</h2>
-  <p><%= simple_format(@job.description) %></p>
-</section>
+  <section>
+    <h2>Cover Letter:</h2>
+    <% if @job.letter %>
+      <p><%= @job.letter.title %></p>
+      <%= link_to "View Letter", url_for(@job.letter.pdf), target: "_blank" if @job.letter.pdf.attached? %>
+    <% else %>
+      <%= form_with model: @job, local: true do |form| %>
+        <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
+        <%= form.submit 'Add Letter' %>
+        <p>or</p>
+        <%= link_to 'Create a New Letter', new_letter_path %>
+      <% end %>
+    <% end %>
+  </section>
+
+  <section>
+    <h2>Description:</h2>
+    <p><%= simple_format(@job.description) %></p>
+  </section>
+</main>
 

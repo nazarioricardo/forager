@@ -1,4 +1,6 @@
-<h1><%= @resume.title %></h1>
-<p><%= @resume.subtitle %></p>
+<main>
+  <h1><%= @resume.title %></h1>
+  <p><%= @resume.subtitle %></p>
 
-<%= link_to "Download PDF", url_for(@resume.pdf) if @resume.pdf.attached? %>
+  <%= link_to "Download PDF", url_for(@resume.pdf) if @resume.pdf.attached? %>
+</main>

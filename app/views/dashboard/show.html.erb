@@ -1,40 +1,42 @@
 <%= stylesheet_link_tag 'dashboard', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<section class="content">
-<%= render 'header_bar', title: "Jobs", action_label: "New Job", action_route: new_job_path %>
-  <section class="board-container">
-    <div class="board">
-      <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
-        <div class="status">
-          <h3><%= status.capitalize %></h3>
-          <ul class="job-list" id=<%= status %>>
-            <% current_user.jobs.where(status: status).order(created_at: :desc).each do |job| %>
-              <%= render 'job_card', job: job %>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-    </div> 
-  </section>
-</section>
-
-<section class="content files">
-  <section class="files_section">
-    <%= render 'header_bar', title: "Resumes", action_label: "New Resume", action_route: new_resume_path %>
-    <ul class="files_list">
-      <% current_user.resumes.each do |resume| %>
-        <%= render 'file_item', title: resume.title, item_path: resume_path(resume) %>
-      <% end %>
-    </ul>
+<main>
+  <section class="content">
+  <%= render 'header_bar', title: "Jobs", action_label: "New Job", action_route: new_job_path %>
+    <section class="board-container">
+      <div class="board">
+        <% ['created', 'applied', 'interviewing', 'done'].each do |status| %>
+          <div class="status">
+            <h3><%= status.capitalize %></h3>
+            <ul class="job-list" id=<%= status %>>
+              <% current_user.jobs.where(status: status).order(created_at: :desc).each do |job| %>
+                <%= render 'job_card', job: job %>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div> 
+    </section>
   </section>
 
-  <section class="files_section">
-    <%= render 'header_bar', title: "Letters", action_label: "New Letter", action_route: new_letter_path %>
-    <ul class="files_list">
-      <% current_user.letters.each do |letter| %>
-        <%= render 'file_item', title: letter.title, item_path: letter_path(letter) %>
-      <% end %> 
-    </ul>
+  <section class="content files">
+    <section class="files_section">
+      <%= render 'header_bar', title: "Resumes", action_label: "New Resume", action_route: new_resume_path %>
+      <ul class="files_list">
+        <% current_user.resumes.each do |resume| %>
+          <%= render 'file_item', title: resume.title, item_path: resume_path(resume) %>
+        <% end %>
+      </ul>
+    </section>
+
+    <section class="files_section">
+      <%= render 'header_bar', title: "Letters", action_label: "New Letter", action_route: new_letter_path %>
+      <ul class="files_list">
+        <% current_user.letters.each do |letter| %>
+          <%= render 'file_item', title: letter.title, item_path: letter_path(letter) %>
+        <% end %> 
+      </ul>
+    </section>
   </section>
-</section>
+</main>
   

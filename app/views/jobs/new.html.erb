@@ -1,48 +1,48 @@
 <%= stylesheet_link_tag 'create_form', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<%= link_to "To Dashboard", dashboard_path %>
+<main>
+  <h1>New Job</h1>
 
-<h1>New Job</h1>
+  <%= form_for @job do |form| %>
+    <% if @job.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
 
-<%= form_for @job do |form| %>
-  <% if @job.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+        <ul>
+        <% @job.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-      <% @job.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= form.label :link %>
+      <%= form.text_field :link %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+
+    <div class="field">
+      <%= form.label :resume_id, "Resume" %>
+      <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :letter_id, "Cover Letter" %>
+      <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-   <div class="field">
-    <%= form.label :link %>
-    <%= form.text_field :link %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :resume_id, "Resume" %>
-    <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :letter_id, "Cover Letter" %>
-    <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</main>

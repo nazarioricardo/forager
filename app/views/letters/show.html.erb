@@ -1,4 +1,6 @@
-<h1><%= @letter.title %></h1>
-<p><%= @letter.subtitle %></p>
+<main>
+  <h1><%= @letter.title %></h1>
+  <p><%= @letter.subtitle %></p>
 
-<%= link_to "Download PDF", url_for(@letter.pdf) if @letter.pdf.attached? %>
+  <%= link_to "Download PDF", url_for(@letter.pdf) if @letter.pdf.attached? %>
+</main>

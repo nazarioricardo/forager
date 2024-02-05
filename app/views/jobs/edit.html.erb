@@ -19,10 +19,6 @@
 </section>
 
 <section>
-  <%= link_to 'Download Documents', download_job_path(@job) %>
-</section>
-
-<section>
   <h2>Resume:</h2>
   <% if @job.resume %>
     <%= form_with model: @job, local: true do |form| %>

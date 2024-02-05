@@ -8,6 +8,12 @@ nav {
   padding: 0 128px;
 }
 
+.right {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
 .auth {
   display: flex;
   flex-direction: column;

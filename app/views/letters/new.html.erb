@@ -1,5 +1,7 @@
 <%= stylesheet_link_tag 'create_form', media: 'all', 'data-turbolinks-track': 'reload' %>
 
+<%= link_to "To Dashboard", dashboard_path %>
+
 <%= form_with model: @letter, local: true do |form| %>
   <div class="field">
     <%= form.label :title %>

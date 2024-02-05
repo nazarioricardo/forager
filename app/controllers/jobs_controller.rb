@@ -31,7 +31,7 @@ class JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
     if @job.update(job_params)
-      head :ok
+      redirect_to job_path(@job)
     else
       head :unprocessable_entity
     end

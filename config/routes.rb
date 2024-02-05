@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'dashboard', to: 'dashboard#show'
   # Jobs
-  resources :jobs, only: [:new, :create, :show, :update] do
+  resources :jobs, only: [:new, :create, :show, :update, :edit] do
     get 'download', on: :member
   end
   # Resumes

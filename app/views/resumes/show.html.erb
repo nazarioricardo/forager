@@ -1,6 +1,4 @@
 <h1><%= @resume.title %></h1>
 <p><%= @resume.subtitle %></p>
-<div>
-<%= link_to "To Dashboard", dashboard_path %>
-</div>
+
 <%= link_to "Download PDF", url_for(@resume.pdf) if @resume.pdf.attached? %>

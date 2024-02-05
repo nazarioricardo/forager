@@ -1,6 +1,4 @@
 <h1><%= @letter.title %></h1>
 <p><%= @letter.subtitle %></p>
-<div>
-<%= link_to "To Dashboard", dashboard_path %>
-</div>
+
 <%= link_to "Download PDF", url_for(@letter.pdf) if @letter.pdf.attached? %>

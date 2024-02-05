@@ -16,27 +16,27 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
 
    <div class="field">
-    <%= f.label :link %><br>
+    <%= f.label :link %>
     <%= f.text_field :link %>
   </div>
 
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
 
   <div class="field">
-    <%= f.label :resume_id, "Resume" %><br>
+    <%= f.label :resume_id, "Resume" %>
     <%= f.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
   </div>
 
   <div class="field">
-    <%= f.label :letter_id, "Cover Letter" %><br>
+    <%= f.label :letter_id, "Cover Letter" %>
     <%= f.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
   </div>
 

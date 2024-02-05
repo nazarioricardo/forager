@@ -18,7 +18,7 @@
   <% if @job.resume %>
     <%= form_with model: @job, local: true do |form| %>
       <%= form.collection_select :resume_id, @resumes, :id, :title %>
-      <%= form.submit "Update Resume" %>
+      <%= form.submit "Change Resume" %>
     <% end %>
   <% else %>
     <%= form_with model: @job, local: true do |form| %>
@@ -33,7 +33,7 @@
   <% if @job.letter %>
     <%= form_with model: @job, local: true do |form| %>
       <%= form.collection_select :letter_id, @letters, :id, :title %>
-      <%= form.submit 'Update Letter' %>
+      <%= form.submit 'Change Letter' %>
     <% end %>
   <% else %>
     <%= form_with model: @job, local: true do |form| %>

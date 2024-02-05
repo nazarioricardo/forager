@@ -4,7 +4,7 @@
 
 <h1>New Job</h1>
 
-<%= form_for @job do |f| %>
+<%= form_for @job do |form| %>
   <% if @job.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
@@ -18,31 +18,31 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
   </div>
 
    <div class="field">
-    <%= f.label :link %>
-    <%= f.text_field :link %>
+    <%= form.label :link %>
+    <%= form.text_field :link %>
   </div>
 
   <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
   </div>
 
   <div class="field">
-    <%= f.label :resume_id, "Resume" %>
-    <%= f.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
+    <%= form.label :resume_id, "Resume" %>
+    <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
   </div>
 
   <div class="field">
-    <%= f.label :letter_id, "Cover Letter" %>
-    <%= f.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
+    <%= form.label :letter_id, "Cover Letter" %>
+    <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= form.submit %>
   </div>
 <% end %>

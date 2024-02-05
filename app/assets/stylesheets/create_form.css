@@ -1,0 +1,23 @@
+form {
+  min-width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* form .field {
+  background-color: red;
+} */
+
+.field > input {
+  width: 100%;
+}
+
+.field > textarea {
+  width: 100%;
+  min-height: 200px;
+}
+
+.field > select {
+  width: 100%;
+}

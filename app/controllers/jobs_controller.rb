@@ -9,10 +9,14 @@ class JobsController < ApplicationController
 
   def create
     @job = current_user.jobs.new(job_params)
+    @resumes = Resume.all
+    @letters = Letter.all
+
     if @job.save
       redirect_to @job
     else
-      render 'new'
+      puts @job.errors.full_messages
+      render :new, status: :unprocessable_entity
     end
   end
 

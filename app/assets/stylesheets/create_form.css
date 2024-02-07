@@ -11,6 +11,11 @@ form {
   gap: 6px;
 }
 
+.field_with_errors > input {
+  border: red 1px solid;
+  width: 100%;
+}
+
 .field > input {
   width: 100%;
 }
@@ -18,6 +23,12 @@ form {
 .field > textarea {
   width: 100%;
   min-height: 200px;
+}
+
+.field_with_errors > textarea {
+  width: 100%;
+  min-height: 200px;
+  border: red 1px solid;
 }
 
 .field > select {

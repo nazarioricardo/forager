@@ -17,7 +17,7 @@ class ResumesController < ApplicationController
       end
     else
       puts @resume.errors.full_messages
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

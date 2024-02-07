@@ -17,7 +17,7 @@ class LettersController < ApplicationController
       end
     else
       puts @letter.errors.full_messages
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

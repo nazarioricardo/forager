@@ -1,6 +1,18 @@
 <%= stylesheet_link_tag 'create_form', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <main>
+  <h1>New Letter</h1>
+
+  <% if @letter.errors.any? %>
+    <div>
+      <h3>Found <%= pluralize(@letter.errors.count, "error") %> errors</h3>
+      <ul>
+      <% @letter.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <%= form_with model: @letter, local: true do |form| %>
     <% if params[:job_id] %>
       <%= form.hidden_field :job_id, value: params[:job_id] %>
@@ -8,7 +20,7 @@
     
     <div class="field">
       <%= form.label :title %>
-      <%= form.text_field :title, required: true %>
+      <%= form.text_field :title %>
     </div>
 
     <div class="field">
@@ -18,7 +30,7 @@
 
     <div class="field">
       <%= form.label :pdf %>
-      <%= form.file_field :pdf, accept: 'application/pdf', required: true %>
+      <%= form.file_field :pdf, accept: 'application/pdf'  %>
     </div>
 
     <div>

@@ -4,11 +4,20 @@ class ResumesController < ApplicationController
   end
 
   def create
-    @resume = current_user.resumes.new(resume_params)
+    job_id = params[:resume][:job_id] if params[:resume]
+    cleaned_params = resume_params.except(:job_id)
+    @resume = current_user.resumes.new(cleaned_params)
+
     if @resume.save
-      redirect_to @resume
+      if job_id = resume_params[:job_id]
+        @job = Job.update(job_id, resume_id: @resume.id)
+        redirect_to @job
+      else 
+        redirect_to @resume
+      end
     else
-      render 'new'
+      puts @resume.errors.full_messages
+      render :new
     end
   end
 
@@ -19,6 +28,6 @@ class ResumesController < ApplicationController
   private
 
   def resume_params
-    params.require(:resume).permit(:title, :subtitle, :pdf)
+    params.require(:resume).permit(:title, :subtitle, :pdf, :job_id)
   end
 end

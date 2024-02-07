@@ -5,8 +5,8 @@ class LettersController < ApplicationController
 
   def create
     job_id = params[:letter][:job_id] if params[:letter]
-    letter_params_without_job_id = letter_params.except(:job_id)
-    @letter = current_user.letters.new(letter_params_without_job_id)
+    cleaned_params = letter_params.except(:job_id)
+    @letter = current_user.letters.new(cleaned_params)
 
     if @letter.save
       if job_id = letter_params[:job_id]

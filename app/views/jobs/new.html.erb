@@ -18,7 +18,7 @@
 
     <div class="field">
       <%= form.label :title %>
-      <%= form.text_field :title %>
+      <%= form.text_field :title, required: true %>
     </div>
 
     <div class="field">
@@ -28,7 +28,7 @@
 
     <div class="field">
       <%= form.label :description %>
-      <%= form.text_area :description %>
+      <%= form.text_area :description, required: true %>
     </div>
 
     <div class="field">
@@ -40,6 +40,12 @@
       <%= form.label :letter_id, "Cover Letter" %>
       <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
     </div>
+
+    <ul>
+      <% @job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
 
     <div class="actions">
       <%= form.submit %>

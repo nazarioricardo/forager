@@ -32,6 +32,8 @@
         <% else %>
           <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
         <% end %>
+        <p>or</p>
+        <%= link_to 'Create a New Resume', new_resume_path(job_id: @job.id) %>
       </div>
 
       <div class="field">
@@ -41,6 +43,8 @@
         <% else %>
           <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
         <% end %>
+        <p>or</p>
+        <%= link_to 'Create a New Letter', new_letter_path(job_id: @job.id) %>
       </div>
 
       <div class="field">

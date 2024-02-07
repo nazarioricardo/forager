@@ -11,6 +11,11 @@
 
     <%= form_with model: @job, local: true, method: :put do |form| %>
       <div class="field">
+        <h2>Title</h2>
+        <%= form.text_field :title %>
+      </div>
+
+      <div class="field">
         <h2>Link</h2>
         <%= form.text_field :link %>
       </div>

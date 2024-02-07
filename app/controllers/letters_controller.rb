@@ -4,11 +4,20 @@ class LettersController < ApplicationController
   end
 
   def create
-    @letter = current_user.letters.new(letter_params)
+    job_id = params[:letter][:job_id] if params[:letter]
+    letter_params_without_job_id = letter_params.except(:job_id)
+    @letter = current_user.letters.new(letter_params_without_job_id)
+
     if @letter.save
-      redirect_to @letter
+      if job_id = letter_params[:job_id]
+        @job = Job.update(job_id, letter_id: @letter.id)
+        redirect_to @job
+      else
+        redirect_to @letter
+      end
     else
-      render 'new'
+      puts @letter.errors.full_messages
+      render :new
     end
   end
 
@@ -19,6 +28,6 @@ class LettersController < ApplicationController
   private
 
   def letter_params
-    params.require(:letter).permit(:title, :subtitle, :pdf)
+    params.require(:letter).permit(:title, :subtitle, :pdf, :job_id)
   end
 end

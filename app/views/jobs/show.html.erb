@@ -33,7 +33,9 @@
         </div>
       <% end %>
     <% end %>
-    <%= link_to 'Create a New Resume', new_resume_path(job_id: @job.id) %>
+    <% if !@job.resume %>
+      <%= link_to 'Create a New Resume', new_resume_path(job_id: @job.id) %>
+    <% end %>
   </section>
 
   <section class="content">
@@ -49,7 +51,10 @@
         </div>
       <% end %>
     <% end %>
-    <%= link_to 'Create a New Letter', new_letter_path(job_id: @job.id) %>
+    <% if !@job.letter %>
+      <%= link_to 'Create a New Letter', new_letter_path(job_id: @job.id) %>
+    <% end %>
+
   </section>
 
   <section class="content">

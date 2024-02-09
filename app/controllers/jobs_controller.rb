@@ -3,14 +3,14 @@ require 'zip'
 class JobsController < ApplicationController
   def new
     @job = Job.new
-    @resumes = Resume.all
-    @letters = Letter.all
+    @resumes = current_user.resumes
+    @letters = current_user.letters
   end
 
   def create
     @job = current_user.jobs.new(job_params)
-    @resumes = Resume.all
-    @letters = Letter.all
+    @resumes = current_user.resumes
+    @letters = current_user.letters
 
     if @job.save
       redirect_to @job
@@ -22,14 +22,14 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
-    @resumes = Resume.all
-    @letters = Letter.all
+    @resumes = current_user.resumes
+    @letters = current_user.letters
   end
 
   def edit
     @job = Job.find(params[:id])
-    @resumes = Resume.all
-    @letters = Letter.all
+    @resumes = current_user.resumes
+    @letters = current_user.letters
   end
 
   def update

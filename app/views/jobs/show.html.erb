@@ -25,16 +25,15 @@
     <% if @job.resume %>
       <p><%= @job.resume.title %></p>
       <%= link_to "View Resume", url_for(@job.resume.pdf), target: "_blank" if @job.resume.pdf.attached? %>
-    <% else %>
+    <% elsif @resumes.any? %>
       <%= form_with model: @job, local: true do |form| %>
         <div class="field">
           <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
           <%= form.submit 'Add Resume' %>
         </div>
       <% end %>
-      <p>or</p>
-      <%= link_to 'Create a New Resume', new_resume_path(job_id: @job.id) %>
     <% end %>
+    <%= link_to 'Create a New Resume', new_resume_path(job_id: @job.id) %>
   </section>
 
   <section class="content">
@@ -42,16 +41,15 @@
     <% if @job.letter %>
       <p><%= @job.letter.title %></p>
       <%= link_to "View Letter", url_for(@job.letter.pdf), target: "_blank" if @job.letter.pdf.attached? %>
-    <% else %>
+    <% elsif @letters.any? %>
       <%= form_with model: @job, local: true do |form| %>
         <div class="field">
           <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
           <%= form.submit 'Add Letter' %>
         </div>
       <% end %>
-      <p>or</p>
-      <%= link_to 'Create a New Letter', new_letter_path(job_id: @job.id) %>
     <% end %>
+    <%= link_to 'Create a New Letter', new_letter_path(job_id: @job.id) %>
   </section>
 
   <section class="content">

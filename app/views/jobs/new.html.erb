@@ -29,17 +29,6 @@
       <%= form.label :description %>
       <%= form.text_area :description %>
     </div>
-
-    <div class="field">
-      <%= form.label :resume_id, "Resume" %>
-      <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
-    </div>
-
-    <div class="field">
-      <%= form.label :letter_id, "Cover Letter" %>
-      <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
-    </div>
-
     <div class="actions">
       <%= form.submit %>
     </div>

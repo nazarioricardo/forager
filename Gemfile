@@ -74,3 +74,4 @@ gem "omniauth-rails_csrf_protection"
 gem "turbolinks"
 gem 'rubyzip'
 gem 'google-api-client'
+gem 'dotenv-rails', groups: [:development, :test]

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   get 'render/index'
-  devise_for :users
-
+  devise_for :user,
+  controllers: {
+     omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+  
   get 'pages/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'dashboard', to: 'dashboard#show'

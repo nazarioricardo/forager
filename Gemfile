@@ -44,7 +44,6 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'devise', '~> 4.9.2'
 gem 'aws-sdk-s3', require: false
 
 group :development, :test do
@@ -69,5 +68,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem 'devise', '~> 4.9.2'
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 gem "turbolinks"
 gem 'rubyzip'

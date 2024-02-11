@@ -312,6 +312,9 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   # config.omniauth :google_oauth2, ENV['GOOGLE_OAUTH_CLIENT_ID'], ENV['GOOGLE_OAUTH_CLIENT_SECRET']
-  config.omniauth :google_oauth2, '478282003777-55cuij19l1lb5l77jmf6gd741t6uoh32.apps.googleusercontent.com', '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'
+  config.omniauth :google_oauth2, '478282003777-55cuij19l1lb5l77jmf6gd741t6uoh32.apps.googleusercontent.com', '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', {
+    scope: 'userinfo.email,userinfo.profile,https://www.googleapis.com/auth/drive',
+    prompt: 'select_account consent'
+  }
 
 end

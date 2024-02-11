@@ -9,7 +9,8 @@ class User < ApplicationRecord
   has_many :resumes
   has_many :letters
 
-  def self.from_google(email:, uid: )
-    find_or_create_by!(email: email, uid: uid, provider: 'google_oauth2')
+  def self.from_google(u)
+    create_with(uid: u[:uid], name: u[:name], provider: 'google',
+                password: Devise.friendly_token[0, 20]).find_or_create_by!(email: u[:email])
   end
 end

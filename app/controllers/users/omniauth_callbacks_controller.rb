@@ -10,16 +10,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:alert] = t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
       redirect_to new_user_session_path
     end
-   end
+  end
 
-   def from_google_params
-     @from_google_params ||= {
-       uid: auth.uid,
-       email: auth.info.email
-     }
-   end
+  def from_google_params
+    @from_google_params ||= {
+      uid: auth.uid,
+      email: auth.info.email
+    }
+  end
 
-   def auth
-     @auth ||= request.env['omniauth.auth']
-   end
+  def auth
+    @auth ||= request.env['omniauth.auth']
+  end
 end

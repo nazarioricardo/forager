@@ -8,4 +8,8 @@ class User < ApplicationRecord
   has_many :jobs
   has_many :resumes
   has_many :letters
+
+  def self.from_google(email:, uid: )
+    find_or_create_by!(email: email, uid: uid, provider: 'google_oauth2')
+  end
 end

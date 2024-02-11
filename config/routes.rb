@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   get 'render/index'
-  devise_for :user,
+  devise_for :users,
   controllers: {
-     omniauth_callbacks: 'users/omniauth_callbacks'
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
+
   
   get 'pages/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -13,6 +13,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def from_google_params
+    print "!!!?!!?!!auth: #{auth}"
     @from_google_params ||= {
       uid: auth.uid,
       email: auth.info.email

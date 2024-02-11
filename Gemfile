@@ -73,3 +73,4 @@ gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 gem "turbolinks"
 gem 'rubyzip'
+gem 'google-api-client'

@@ -43,16 +43,19 @@ class JobsController < ApplicationController
 
   def download
     @job = Job.find(params[:id])
-  
+    doc_service = DocumentService.new(current_user.google_token)
+    
     zip_stream = Zip::OutputStream.write_buffer do |zip|
-      if @job.resume.pdf.attached?
+      if @job&.resume&.google_drive_file_id
+        resume_pdf_data = doc_service.generate_pdf(@job.resume.google_drive_file_id)
         zip.put_next_entry("#{@job.title} Resume.pdf")
-        zip.write @job.resume.pdf.download
+        zip.write resume_pdf_data
       end
     
-      if @job.letter.pdf.attached?
+      if @job&.letter&.google_drive_file_id
+        letter_pdf_data = doc_service.generate_pdf(@job.letter.google_drive_file_id)
         zip.put_next_entry("#{@job.title} Letter.pdf")
-        zip.write @job.letter.pdf.download
+        zip.write letter_pdf_data
       end
     end
   

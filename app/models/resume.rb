@@ -7,6 +7,6 @@ class Resume < ApplicationRecord
   has_many :jobs
 
   def google_drive_url
-    "https://drive.google.com/file/d/#{self.file_id}/view"
+    "https://drive.google.com/file/d/#{self.google_drive_file_id}/view"
   end
 end

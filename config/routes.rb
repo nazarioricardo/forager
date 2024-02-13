@@ -13,12 +13,17 @@ Rails.application.routes.draw do
   get 'pages/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'dashboard', to: 'dashboard#show'
+  
   # Jobs
   resources :jobs, only: [:new, :create, :show, :update, :edit] do
     get 'download', on: :member
   end
+
   # Resumes
   resources :resumes, only: [:new, :create, :show]
+  resources :resumes do
+    get 'download', on: :member
+  end
 
   # Letters
   resources :letters, only: [:new, :create, :show]

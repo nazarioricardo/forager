@@ -24,7 +24,7 @@
     <h2>Resume</h2>
     <% if @job.resume %>
       <p><%= @job.resume.title %></p>
-      <%= link_to "View Resume", url_for(@job.resume.pdf), target: "_blank" if @job.resume.pdf.attached? %>
+      <%= link_to "View Resume", url_for(@job.resume.google_drive_url), target: "_blank" %>
     <% elsif @resumes.any? %>
       <%= form_with model: @job, local: true do |form| %>
         <div class="field">
@@ -42,7 +42,7 @@
     <h2>Cover Letter</h2>
     <% if @job.letter %>
       <p><%= @job.letter.title %></p>
-      <%= link_to "View Letter", url_for(@job.letter.pdf), target: "_blank" if @job.letter.pdf.attached? %>
+      <%= link_to "View Letter", url_for(@job.letter.google_drive_url), target: "_blank" %>
     <% elsif @letters.any? %>
       <%= form_with model: @job, local: true do |form| %>
         <div class="field">

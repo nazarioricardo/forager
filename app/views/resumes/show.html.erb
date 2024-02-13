@@ -1,6 +1,7 @@
 <main>
   <h1><%= @resume.title %></h1>
   <p><%= @resume.subtitle %></p>
-  <%= link_to 'View Document', @resume.google_drive_url %>
+  <%= link_to 'View Document', @resume.drive_url %>
+  <%= link_to 'Edit Document', @resume.docs_url %>
   <%= link_to 'Download Modified PDF', download_resume_path(@resume), method: :get %>
 </main>

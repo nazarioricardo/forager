@@ -3,6 +3,7 @@
   <head>
     <title>Forager</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://apis.google.com/js/api.js"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,8 +11,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= render 'navbar' %>
+<body 
+  data-google-oauth-token="<%= current_user&.google_token %>"
+  data-google-oauth-client-id="<%= ENV['GOOGLE_OAUTH_CLIENT_ID'] %>"
+  data-google-service-key="<%= ENV['GOOGLE_SERVICE_KEY'] %>"
+>
+  <%= render 'navbar' %>
     <%= yield %>
   </body>
 </html>

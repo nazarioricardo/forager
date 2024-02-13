@@ -25,9 +25,17 @@ class LettersController < ApplicationController
     @letter = Letter.find(params[:id])
   end
 
+  def download
+    @letter = Letter.find(params[:id])
+    doc_service = DocumentService.new(current_user.google_token)
+
+    pdf_data = google.drive.export_file(@letter.google_drive_file_id, 'application/pdf')
+    send_data pdf_data, filename: "#{@letter.title} Letter.pdf", type: 'application/pdf'
+  end
+
   private
 
   def letter_params
-    params.require(:letter).permit(:title, :subtitle, :pdf, :job_id)
+    params.require(:letter).permit(:title, :subtitle, :google_drive_file_id, :job_id)
   end
 end

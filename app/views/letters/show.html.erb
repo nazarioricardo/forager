@@ -1,6 +1,7 @@
 <main>
   <h1><%= @letter.title %></h1>
   <p><%= @letter.subtitle %></p>
-
-  <%= link_to "Download PDF", url_for(@letter.pdf) if @letter.pdf.attached? %>
+  <%= link_to 'View Document', @letter.drive_url %>
+  <%= link_to 'Edit Document', @letter.docs_url %>
+  <%= link_to 'Download Modified PDF', download_letter_path(@letter), method: :get %>
 </main>

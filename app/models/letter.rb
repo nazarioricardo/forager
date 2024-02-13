@@ -1,13 +1,16 @@
 class Letter < ApplicationRecord
   validates :title, presence: true
-  validate :pdf_attached
+  validates :google_drive_file_id, presence: true
 
-  has_one_attached :pdf
   belongs_to :user
   
   has_many :jobs
 
-  def pdf_attached
-    errors.add(:pdf, "must be attached") unless pdf.attached?
+  def drive_url
+    "https://drive.google.com/file/d/#{self.google_drive_file_id}/view"
+  end
+
+  def docs_url
+    "https://docs.google.com/document/d/#{self.google_drive_file_id}/edit"
   end
 end

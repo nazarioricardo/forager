@@ -25,9 +25,17 @@ class ResumesController < ApplicationController
     @resume = Resume.find(params[:id])
   end
 
+  def download
+    @resume = Resume.find(params[:id])
+    doc_service = DocumentService.new(current_user.google_token)
+
+    pdf_data = doc_service.generate_pdf(@resume.google_drive_file_id)
+    send_data pdf_data, filename: "#{@resume.title} Resume.pdf", type: 'application/pdf'
+  end
+
   private
 
   def resume_params
-    params.require(:resume).permit(:title, :subtitle, :pdf, :job_id)
+    params.require(:resume).permit(:title, :subtitle, :google_drive_file_id, :job_id)
   end
 end

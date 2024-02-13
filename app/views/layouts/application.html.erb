@@ -12,7 +12,7 @@
   </head>
 
 <body 
-  data-google-oauth-token="<%= current_user.google_token %>"
+  data-google-oauth-token="<%= current_user&.google_token %>"
   data-google-oauth-client-id="<%= ENV['GOOGLE_OAUTH_CLIENT_ID'] %>"
   data-google-service-key="<%= ENV['GOOGLE_SERVICE_KEY'] %>"
 >

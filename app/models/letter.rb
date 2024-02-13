@@ -5,4 +5,8 @@ class Letter < ApplicationRecord
   belongs_to :user
   
   has_many :jobs
+
+  def google_drive_url
+    "https://drive.google.com/file/d/#{self.file_id}/view"
+  end
 end

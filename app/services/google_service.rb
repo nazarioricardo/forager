@@ -1,12 +1,17 @@
 require 'google/apis/drive_v3'
+require 'google/apis/docs_v1'
 
-class GoogleDriveService
+class GoogleService
+  attr_reader :drive, :docs
+
   APPLICATION_NAME = 'Forager'
   SCOPE = Google::Apis::DriveV3::AUTH_DRIVE
   
   def initialize(access_token)
-    @service = Google::Apis::DriveV3::DriveService.new
-    @service.authorization = access_token
+    @drive = Google::Apis::DriveV3::DriveService.new
+    @drive.authorization = access_token
+    @docs = Google::Apis::DocsV1::DocsService.new
+    @docs.authorization = access_token
   end
 
   def list_files

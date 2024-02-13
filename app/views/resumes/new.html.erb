@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag 'create_form', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'drive_picker' %>
 
 <main>
   <h1>New Resume</h1>
@@ -18,6 +19,7 @@
       <%= form.hidden_field :job_id, value: params[:job_id] %>
     <% end %>  
     
+
     <div class="field">
       <%= form.label :title %>
       <%= form.text_field :title %>
@@ -27,14 +29,16 @@
       <%= form.label :subtitle %>
       <%= form.text_field :subtitle %>
     </div>
-
+    
     <div class="field">
-      <%= form.label :pdf %>
-      <%= form.file_field :pdf, accept: 'application/pdf' %>
+      <%= form.label :google_drive_file_id %>
+      <%= form.hidden_field :google_drive_file_id, id: 'google-drive-file-id' %>
+      <button type="button" id="pick-file">Pick File</button>
     </div>
 
     <div>
       <%= form.submit %>
     </div>
   <% end %>
+
 </main>

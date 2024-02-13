@@ -1,6 +1,6 @@
 <main>
   <h1><%= @resume.title %></h1>
   <p><%= @resume.subtitle %></p>
-
-  <%= link_to "Download PDF", url_for(@resume.pdf) if @resume.pdf.attached? %>
+  <p><%= @resume.google_drive_file_id %></p>
+  <%= link_to 'Download Modified PDF', download_resume_path(@resume), method: :get %>
 </main>

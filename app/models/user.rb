@@ -10,7 +10,12 @@ class User < ApplicationRecord
   has_many :letters
 
   def self.from_google(u)
-    create_with(uid: u[:uid], name: u[:name], provider: 'google',
-                password: Devise.friendly_token[0, 20]).find_or_create_by!(email: u[:email])
+    print "User.from_google: #{u}\n"
+    create_with(
+      uid: u[:uid], 
+      email: u[:email],
+      provider: 'google',
+      password: Devise.friendly_token[0, 20]).find_or_create_by!(email: u[:email]
+    )
   end
 end

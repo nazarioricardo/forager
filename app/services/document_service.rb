@@ -18,11 +18,6 @@ class DocumentService
       folder = response.files.first
     end
 
-    file_metadata = {
-      name: new_name,
-      parents: [folder.id]
-    }
-
     file = Google::Apis::DriveV3::File.new
     file.name = new_name
     file.parents = [folder.id]

@@ -4,7 +4,9 @@ class DocumentService
   end
 
   def copy_file(file_id, new_name, folder_name)
-    response = @google.drive.list_files(q: "mimeType='application/vnd.google-apps.folder' and name='#{folder_name}' and trashed=false")
+    response = @google.drive.list_files(
+      q: "mimeType='application/vnd.google-apps.folder' and name='#{folder_name}' and trashed=false"
+    )
    
     if response.files.empty?
       folder_metadata = {

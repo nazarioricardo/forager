@@ -15,8 +15,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_203815) do
   enable_extension "plpgsql"
 
   create_table "letters", force: :cascade do |t|
-    t.string "company", null: false
-    t.string "role", null: false
+    t.string "title", null: false
     t.bigint "user_id", null: false
     t.string "google_drive_file_id", null: false
     t.datetime "created_at", null: false
@@ -25,8 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_203815) do
   end
 
   create_table "resumes", force: :cascade do |t|
-    t.string "company", null: false
-    t.string "role", null: false
+    t.string "title", null: false
     t.bigint "user_id", null: false
     t.string "google_drive_file_id", null: false
     t.datetime "created_at", null: false

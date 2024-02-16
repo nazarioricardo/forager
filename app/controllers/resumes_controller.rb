@@ -29,7 +29,7 @@ class ResumesController < ApplicationController
     @resume = Resume.find(params[:id])
     doc_service = DocumentService.new(current_user.google_token)
 
-    pdf_data = doc_service.generate_pdf(@resume.google_drive_file_id)
+    pdf_data = doc_service.generate_pdf(@resume.google_drive_file_id, "#{@resume.title} Resume.pdf", @resume.title)
     send_data pdf_data, filename: "#{@resume.title} Resume.pdf", type: 'application/pdf'
   end
 

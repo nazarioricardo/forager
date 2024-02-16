@@ -5,8 +5,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     auth = request.env['omniauth.auth']
     # Find or create user, then save the token
     user = User.find_or_create_by(email: auth.info.email)
-    user.google_token = auth.credentials.token
+    user.google_token = auth.credentials.token    
     user.save
+
+    user.first_name ||= auth.info['given_name']
+    user.last_name ||= auth.info['family_name']
+    user.save if user.changed?
 
     if user.present?
       sign_out_all_scopes

@@ -1,5 +1,6 @@
 class Job < ApplicationRecord
-  validates :title, presence: true
+  validates :company, presence: true
+  validates :role, presence: true
   validates :description, presence: true
   validates_format_of :link, with: /\A#{URI::regexp(['http', 'https'])}\z/, message: 'must be a valid URL', allow_blank: true
 

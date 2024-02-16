@@ -1,9 +1,9 @@
 <main>
   <section class="content">
     <% if @job.link.present? %>
-      <h1><%= link_to @job.title, @job.link %></h1>
+      <h1><%= link_to "#{@job.company} - #{@job.role}", @job.link %></h1>
     <% else %>
-      <h1><%= @job.title %></h1>
+      <h1><%= "#{@job.company} - #{@job.role}" %></h1>
     <% end %>
     <p><%= @job.created_at.strftime('%m/%d/%Y') %></p>
     <%= link_to 'View', job_path(@job) %>
@@ -11,8 +11,13 @@
 
     <%= form_with model: @job, local: true, method: :put do |form| %>
       <div class="field">
-        <h2>Title</h2>
-        <%= form.text_field :title %>
+        <h2>Company</h2>
+        <%= form.text_field :company %>
+      </div>
+
+      <div class="field">
+        <h2>Role</h2>
+        <%= form.text_field :role %>
       </div>
 
       <div class="field">
@@ -48,6 +53,8 @@
       <div class="field">
         <h2>Description</h2>
         <%= form.text_area :description %>
+      </div>
+
       <div class="actions">
         <%= form.submit %>
       </div>

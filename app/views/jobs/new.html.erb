@@ -16,8 +16,13 @@
 
   <%= form_for @job do |form| %>
     <div class="field">
-      <%= form.label :title %>
-      <%= form.text_field :title %>
+      <%= form.label :company %>
+      <%= form.text_field :company %>
+    </div>
+
+    <div class="field">
+      <%= form.label :role %>
+      <%= form.text_field :role %>
     </div>
 
     <div class="field">
@@ -29,7 +34,6 @@
       <%= form.label :description %>
       <%= form.text_area :description %>
     </div>
-
     
     <div class="actions">
       <%= form.submit %>

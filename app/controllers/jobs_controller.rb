@@ -49,34 +49,34 @@ class JobsController < ApplicationController
       if @job&.resume&.google_drive_file_id
         resume_pdf_data = doc_service.generate_pdf(
           @job.resume.google_drive_file_id, 
-          "#{@job.title} Resume", 
-          @job.title
+          "#{@job.company} Resume", 
+          "#{@job.company} - #{@job.role}"
         )
 
-        zip.put_next_entry("#{@job.title} Resume.pdf")
+        zip.put_next_entry("#{@job.role} Resume.pdf")
         zip.write resume_pdf_data
       end
     
       if @job&.letter&.google_drive_file_id
         letter_pdf_data = doc_service.generate_pdf(
           @job.letter.google_drive_file_id, 
-          "#{@job.title} Letter", 
-          @job.title
+          "#{@job.role} Letter", 
+          "#{@job.company} - #{@job.role}"
         )
         
-        zip.put_next_entry("#{@job.title} Letter.pdf")
+        zip.put_next_entry("#{@job.role} Letter.pdf")
         zip.write letter_pdf_data
       end
     end
   
     zip_stream.rewind
-    sanitized_title = @job.title.gsub(/[^0-9A-Za-z.\-]/, '_')
+    sanitized_title = @job.role.gsub(/[^0-9A-Za-z.\-]/, '_')
     send_data zip_stream.read, filename: "#{sanitized_title} Documents.zip", type: 'application/zip'
   end
 
   private
 
   def job_params
-    params.require(:job).permit(:title, :description, :resume_id, :letter_id, :status, :link)
+    params.require(:job).permit(:company, :role, :description, :resume_id, :letter_id, :status, :link)
   end
 end

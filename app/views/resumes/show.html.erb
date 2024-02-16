@@ -3,5 +3,5 @@
   <p><%= @resume.subtitle %></p>
   <%= link_to 'View Document', @resume.drive_url %>
   <%= link_to 'Edit Document', @resume.docs_url %>
-  <%= link_to 'Download Modified PDF', download_resume_path(@resume), method: :get %>
+  <%= link_to 'Download Modified PDF', download_resume_path(@resume), method: :get, data: { turbo: 'false' } %>
 </main>

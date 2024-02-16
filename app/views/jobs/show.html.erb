@@ -10,7 +10,7 @@
   </section>
 
   <section class="content">
-    <%= link_to 'Download Documents', download_job_path(@job) %>
+    <%= link_to 'Download Documents', download_job_path(@job), data: { turbo: 'false' } %>
   </section>
 
   <section class="content">

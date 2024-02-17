@@ -11,6 +11,10 @@ class Job < ApplicationRecord
 
   before_create :set_default_status
 
+  def name
+    "#{self.company} #{self.role}"
+  end
+
   private
 
   def set_default_status

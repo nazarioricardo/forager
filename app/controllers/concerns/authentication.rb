@@ -12,13 +12,12 @@ module Authentication
   
   def authenticate
     if current_user.nil?
-      redirect_to "/"
-      return
+      redirect_to "/" and return
+
     end
 
     if current_user.google_token.nil?
-      redirect_to omniauth_authorize_path(:user, :google_oauth2)
-      return
+      redirect_to omniauth_authorize_path(:user, :google_oauth2) and return
     end
 
     if Time.now >= current_user.expires_at
@@ -27,19 +26,7 @@ module Authentication
   end
 
   def handle_unauthorized
-    if current_user.nil?
-      redirect_to "/"
-      return
-    end
-
-    if current_user.google_token.nil?
-      redirect_to omniauth_authorize_path(:user, :google_oauth2)
-      return
-    end
-
-    if Time.now >= current_user.expires_at
-      refresh_token(current_user)
-    end
+    redirect_to "/"
   end
 
   def refresh_token(user)
@@ -60,10 +47,12 @@ module Authentication
       http.request(request)
     end
 
-    auth = request.env['omniauth.auth']
-    user.google_token = auth.credentials.token 
-    user.refresh_token = auth.credentials.refresh_token
-    user.expires_at = auth.credentials.expires_at 
+    # response = JSON.parse(response.body)
+    auth = JSON.parse(response.body)
+    user.google_token = auth['access_token'] 
+    user.refresh_token = auth['refresh_token']
+    expires_in = auth['expires_in']
+    user.expires_at = Time.at(expires_in.seconds.from_now).to_datetime
     user.save
   end
 end

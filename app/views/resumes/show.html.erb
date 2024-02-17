@@ -3,4 +3,8 @@
   <%= link_to 'View Document', @resume.drive_url %>
   <%= link_to 'Edit Document', @resume.docs_url %>
   <%= link_to 'Download Modified PDF', download_resume_path(@resume), method: :get, data: { turbo: 'false' } %>
+
+  <% @resume.jobs.each do |job| %>
+    <p><%= link_to "#{job.company} - #{job.role}", job_path(job) %></p>
+  <% end %>
 </main>

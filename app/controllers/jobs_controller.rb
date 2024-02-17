@@ -44,34 +44,36 @@ class JobsController < ApplicationController
   def download
     @job = Job.find(params[:id])
     doc_service = DocumentService.new(current_user.google_token)
-    
+    company_and_role = "#{@job.company} #{@job.role}"
+    full_name = current_user.full_name
+
     zip_stream = Zip::OutputStream.write_buffer do |zip|
       if @job&.resume&.google_drive_file_id
         resume_pdf_data = doc_service.generate_pdf(
           @job.resume.google_drive_file_id, 
-          "#{@job.company} Resume", 
-          "#{@job.company} - #{@job.role}"
+          "#{company_and_role} Resume", 
+          company_and_role
         )
 
-        zip.put_next_entry("#{@job.role} Resume.pdf")
+        zip.put_next_entry("#{full_name} Resume.pdf")
         zip.write resume_pdf_data
       end
     
       if @job&.letter&.google_drive_file_id
         letter_pdf_data = doc_service.generate_pdf(
           @job.letter.google_drive_file_id, 
-          "#{@job.role} Letter", 
-          "#{@job.company} - #{@job.role}"
+          "#{company_and_role} Letter", 
+          company_and_role
         )
         
-        zip.put_next_entry("#{@job.role} Letter.pdf")
+        zip.put_next_entry("#{full_name} Letter.pdf")
         zip.write letter_pdf_data
       end
     end
   
     zip_stream.rewind
-    sanitized_title = @job.role.gsub(/[^0-9A-Za-z.\-]/, '_')
-    send_data zip_stream.read, filename: "#{sanitized_title} Documents.zip", type: 'application/zip'
+    sanitized_title = company_and_role.gsub(/[^0-9A-Za-z.\-]/, ' ')
+    send_data zip_stream.read, filename: "#{sanitized_title}.zip", type: 'application/zip'
   end
 
   private

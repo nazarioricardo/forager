@@ -5,7 +5,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     auth = request.env['omniauth.auth']
     # Find or create user, then save the token
     user = User.find_or_create_by(email: auth.info.email)
-    user.google_token = auth.credentials.token    
+    user.google_token = auth.credentials.token 
+    user.refresh_token = auth.credentials.refresh_token
+    user.expires_at = Time.at(auth.credentials.expires_at).to_datetime
+    print "\nEXPIRES AT: #{auth.credentials.expires_at}\n"
     user.save
 
     user.first_name ||= auth.info['first_name']

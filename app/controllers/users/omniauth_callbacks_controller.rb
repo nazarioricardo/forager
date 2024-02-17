@@ -8,8 +8,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     user.google_token = auth.credentials.token    
     user.save
 
-    user.first_name ||= auth.info['given_name']
-    user.last_name ||= auth.info['family_name']
+    user.first_name ||= auth.info['first_name']
+    user.last_name ||= auth.info['last_name']
     user.save if user.changed?
 
     if user.present?

@@ -1,6 +1,7 @@
 <%= stylesheet_link_tag 'dashboard', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <main>
+<h1><%= current_user.first_name %></h1>
   <section class="dashboard">
   <%= render 'header_bar', title: "Jobs", action_label: "New Job", action_route: new_job_path %>
     <section class="board-container">

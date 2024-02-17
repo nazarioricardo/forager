@@ -14,14 +14,4 @@ class GoogleService
     @docs = Google::Apis::DocsV1::DocsService.new
     @docs.authorization = access_token
   end
-
-  def list_files
-    response = @service.list_files(page_size: 10, order_by: 'modifiedTime desc')
-
-    files = []
-    response.files.each do |file|
-      files << {name: file.name, id: file.id}
-    end
-    files
-  end
 end

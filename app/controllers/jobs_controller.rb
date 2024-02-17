@@ -15,7 +15,7 @@ class JobsController < ApplicationController
     @letters = current_user.letters
 
     if @job.save
-      redirect_to @job
+      redirect_to dashboard_path
     else
       puts @job.errors.full_messages
       render :new, status: :unprocessable_entity

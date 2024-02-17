@@ -6,10 +6,12 @@
       <h1><%= "#{@job.company} - #{@job.role}" %></h1>
     <% end %>
     <p><%= @job.created_at.strftime('%m/%d/%Y') %></p>
-    <%= link_to 'View', job_path(@job) %>
+    <%= link_to 'Cancel', job_path(@job) %>
   </section>
 
     <%= form_with model: @job, local: true, method: :put do |form| %>
+      <%= form.submit "Confirm Changes" %>
+
       <div class="field">
         <h2>Company</h2>
         <%= form.text_field :company %>
@@ -53,10 +55,6 @@
       <div class="field">
         <h2>Description</h2>
         <%= form.text_area :description %>
-      </div>
-
-      <div class="actions">
-        <%= form.submit %>
       </div>
     <% end %>
 

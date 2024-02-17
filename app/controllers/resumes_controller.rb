@@ -27,14 +27,9 @@ class ResumesController < ApplicationController
 
   def download
     @resume = Resume.find(params[:id])
-    doc_service = DocumentService.new(current_user.google_token)
-    copy = doc_service.copy_file(
-      @resume.google_drive_file_id, 
-      "#{@resume.title}.pdf", 
-      @resume.title
-    )
+    @job = Job.find(params[:job_id])
 
-    pdf_data = doc_service.generate_pdf(copy.id)
+    pdf_data = @resume.copy_and_export(@job.company, @job.role, current_user.google_token)    
     send_data pdf_data, filename: "#{@resume.title}.pdf", type: 'application/pdf'
   end
 

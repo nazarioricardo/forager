@@ -44,62 +44,25 @@ class JobsController < ApplicationController
   def download
     @job = Job.find(params[:id])
     doc_service = DocumentService.new(current_user.google_token)
-    company_and_role = "#{@job.company} #{@job.role}"
     full_name = current_user.full_name
 
     zip_stream = Zip::OutputStream.write_buffer do |zip|
       if @job&.resume&.google_drive_file_id
-        copy = doc_service.copy_file(
-          @job.resume.google_drive_file_id, 
-          "#{company_and_role} Resume", 
-          company_and_role
-        )
-
-        doc_service.replace_text(
-          copy.id, 
-          '{{company}}', 
-          @job.company
-        )
-
-        doc_service.replace_text(
-          copy.id, 
-          '{{role}}', 
-          @job.role
-        )
-
-        resume_pdf_data = doc_service.generate_pdf(copy.id)
+        resume_pdf_data = @job.resume.copy_and_export(@job.company, @job.role, current_user.google_token)
         zip.put_next_entry("#{full_name} Resume.pdf")
         zip.write resume_pdf_data
       end
     
       if @job&.letter&.google_drive_file_id
-        copy = doc_service.copy_file(
-          @job.letter.google_drive_file_id, 
-          "#{company_and_role} Letter", 
-          company_and_role
-        )
-
-        doc_service.replace_text(
-          copy.id, 
-          '{{company}}', 
-          @job.company
-        )
-
-        doc_service.replace_text(
-          copy.id, 
-          '{{role}}', 
-          @job.role
-        )
-
-        letter_pdf_data = doc_service.generate_pdf(copy.id)
+        letter_pdf_data = @job.letter.copy_and_export(@job.company, @job.role, current_user.google_token)
         zip.put_next_entry("#{full_name} Letter.pdf")
         zip.write letter_pdf_data
       end
     end
   
     zip_stream.rewind
-    sanitized_title = company_and_role.gsub(/[^0-9A-Za-z.\-]/, ' ')
-    send_data zip_stream.read, filename: "#{sanitized_title}.zip", type: 'application/zip'
+    sanitized_name = @job.name.gsub(/[^0-9A-Za-z.\-]/, ' ')
+    send_data zip_stream.read, filename: "#{sanitized_name}.zip", type: 'application/zip'
   end
 
   private

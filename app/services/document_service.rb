@@ -48,9 +48,7 @@ class DocumentService
     )
   end
 
-  def generate_pdf(file_id, file_name, folder_name)
-    copy = self.copy_file(file_id, file_name, folder_name)
-    requests = self.replace_text(copy.id, 'Ricardo', 'George')
-    @google.drive.export_file(copy.id, 'application/pdf')
+  def generate_pdf(file_id)
+    @google.drive.export_file(file_id, 'application/pdf')
   end
 end

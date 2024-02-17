@@ -17,12 +17,12 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def self.from_google(u)
+  def self.from_google(user)
     create_with(
-      uid: u[:uid], 
-      email: u[:email], 
+      uid: user[:uid], 
+      email: user[:email], 
       provider: 'google',
-      password: Devise.friendly_token[0, 20]).find_or_create_by!(email: u[:email]
+      password: Devise.friendly_token[0, 20]).find_or_create_by!(email: user[:email]
     )
   end
 end

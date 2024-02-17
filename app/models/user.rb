@@ -13,6 +13,10 @@ class User < ApplicationRecord
   has_many :resumes
   has_many :letters
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def self.from_google(u)
     create_with(
       uid: u[:uid], 

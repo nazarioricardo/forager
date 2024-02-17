@@ -29,7 +29,7 @@
       <%= form_with model: @job, local: true do |form| %>
         <div class="field">
           <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
-          <%= form.submit 'Add Resume' %>
+          <%= form.submit 'Confirm Resume' %>
         </div>
       <% end %>
     <% end %>
@@ -47,7 +47,7 @@
       <%= form_with model: @job, local: true do |form| %>
         <div class="field">
           <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
-          <%= form.submit 'Add Letter' %>
+          <%= form.submit 'Confirm Letter' %>
         </div>
       <% end %>
     <% end %>

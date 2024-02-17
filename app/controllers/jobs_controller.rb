@@ -49,23 +49,49 @@ class JobsController < ApplicationController
 
     zip_stream = Zip::OutputStream.write_buffer do |zip|
       if @job&.resume&.google_drive_file_id
-        resume_pdf_data = doc_service.generate_pdf(
+        copy = doc_service.copy_file(
           @job.resume.google_drive_file_id, 
           "#{company_and_role} Resume", 
           company_and_role
         )
 
+        doc_service.replace_text(
+          copy.id, 
+          '{{company}}', 
+          @job.company
+        )
+
+        doc_service.replace_text(
+          copy.id, 
+          '{{role}}', 
+          @job.role
+        )
+
+        resume_pdf_data = doc_service.generate_pdf(copy.id)
         zip.put_next_entry("#{full_name} Resume.pdf")
         zip.write resume_pdf_data
       end
     
       if @job&.letter&.google_drive_file_id
-        letter_pdf_data = doc_service.generate_pdf(
+        copy = doc_service.copy_file(
           @job.letter.google_drive_file_id, 
           "#{company_and_role} Letter", 
           company_and_role
         )
-        
+
+        doc_service.replace_text(
+          copy.id, 
+          '{{company}}', 
+          @job.company
+        )
+
+        doc_service.replace_text(
+          copy.id, 
+          '{{role}}', 
+          @job.role
+        )
+
+        letter_pdf_data = doc_service.generate_pdf(copy.id)
         zip.put_next_entry("#{full_name} Letter.pdf")
         zip.write letter_pdf_data
       end

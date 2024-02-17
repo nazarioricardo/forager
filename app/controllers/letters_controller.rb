@@ -15,7 +15,7 @@ class LettersController < ApplicationController
         @job = Job.update(job_id, letter_id: @letter.id)
         redirect_to @job
       else
-        redirect_to @letter
+        redirect_to dashboard_path
       end
     else
       puts @letter.errors.full_messages

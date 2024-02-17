@@ -15,7 +15,7 @@ class ResumesController < ApplicationController
         @job = Job.update(job_id, resume_id: @resume.id)
         redirect_to @job
       else 
-        redirect_to @resume
+        redirect_to dashboard_path
       end
     else
       puts @resume.errors.full_messages

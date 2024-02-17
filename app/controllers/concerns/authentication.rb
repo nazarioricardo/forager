@@ -8,9 +8,12 @@ module Authentication
   private
   
   def authenticate
-    user = User.find(params[:user_id])
-    if user.google_token.nil?
+    if current_user.nil?
       redirect_to "/"
+    end
+
+    if current_user.google_token.nil?
+      redirect_to "/auth/google_oauth2"
     end
   end
 end

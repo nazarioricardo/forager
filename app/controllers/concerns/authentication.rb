@@ -13,7 +13,7 @@ module Authentication
     end
 
     if current_user.google_token.nil?
-      redirect_to "/auth/google_oauth2"
+      redirect_to "/users/auth/google_oauth2"
     end
   end
 end

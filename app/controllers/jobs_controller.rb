@@ -1,6 +1,8 @@
 require 'zip'
 
 class JobsController < ApplicationController
+  include Authentication
+  
   def new
     @job = Job.new
     @resumes = current_user.resumes

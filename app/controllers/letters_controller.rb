@@ -1,4 +1,6 @@
 class LettersController < ApplicationController
+  include Authentication
+
   def new
     @letter = Letter.new
   end

@@ -1,4 +1,6 @@
 class ResumesController < ApplicationController
+  include Authentication
+
   def new
     @resume = Resume.new
   end

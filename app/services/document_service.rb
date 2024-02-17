@@ -40,6 +40,10 @@ class DocumentService
       )
     )]
 
+    requests
+  end
+
+  def execute_requests(file_id, requests)
     @google.docs.batch_update_document(
       file_id,
       Google::Apis::DocsV1::BatchUpdateDocumentRequest.new(

@@ -28,9 +28,14 @@ class LettersController < ApplicationController
   def download
     @letter = Letter.find(params[:id])
     doc_service = DocumentService.new(current_user.google_token)
-
-    pdf_data = doc_service.generate_pdf(@letter.google_drive_file_id, "#{@letter.title} Letter.pdf", @letter.title)
-    send_data pdf_data, filename: "#{@letter.title} Letter.pdf", type: 'application/pdf'
+    copy = doc_service.copy_file(
+      @letter.google_drive_file_id, 
+      "#{@letter.title}.pdf", 
+      @letter.title
+    )
+    
+    pdf_data = doc_service.generate_pdf(copy.id)
+    send_data pdf_data, filename: "#{@letter.title}.pdf", type: 'application/pdf'
   end
 
   private

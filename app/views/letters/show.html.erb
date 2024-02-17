@@ -2,9 +2,9 @@
   <h1><%= @letter.title %></h1>
   <%= link_to 'View Document', @letter.drive_url %>
   <%= link_to 'Edit Document', @letter.docs_url %>
-  <%= link_to 'Download Modified PDF', download_letter_path(@letter), method: :get, data: { turbo: 'false' } %>
 
    <% @letter.jobs.each do |job| %>
-    <p><%= link_to "#{job.company} - #{job.role}", job_path(job) %></p>
+    <%= link_to "#{job.company} - #{job.role}", job_path(job) %>
+    <%= link_to 'Download Modified PDF', download_letter_path(@letter, job_id: job.id), method: :get, data: { turbo: 'false' } %>
   <% end %>
 </main>

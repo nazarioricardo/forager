@@ -1,42 +1,63 @@
-<%= stylesheet_link_tag 'create_form', media: 'all', 'data-turbolinks-track': 'reload' %>
+<main class="container flex flex-1 flex-col overflow-scroll justify-center items-center mx-auto px-4">
 
-<main>
-  <h1>New Job</h1>
+  <%= form_for @job, html: { class: "card p-10 bg-base-200 text-base-content w-4/5 shadow-xl" } do |form| %>
+    <h1 class="card-title font-bold text-xl">New Job</h1>
+    <div class="card-body flex justify-end">
+      <div class="<%= 'field_with_errors' if @job.errors[:company].any? %>">        
+        <%= form.label :company, class: "label-text font-bold" %>
+        <% if @job.errors[:company].any? %>
+          <% @job.errors[:company].each do |error| %>
+            <span class="text-xs text-error"><%= error %></span>
+          <% end %>
+        <% end %>
+        <%= form.text_field :company, 
+          placeholder: "Skynet", 
+          class: "input input-bordered w-full flex items-center #{"input-error" if @job.errors[:company].any?}" 
+        %>
+      </div>
 
-  <% if @job.errors.any? %>
-    <div>
-      <h3>Found <%= pluralize(@job.errors.count, "error") %> errors</h3>
-      <ul>
-      <% @job.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <div>
+        <%= form.label :role, class: "label-text font-bold" %>
+          <% if @job.errors[:role].any? %>
+            <% @job.errors[:role].each do |error| %>
+              <span class="text-xs text-error"><%= error %></span>
+            <% end %>
+          <% end %>
+        <%= form.text_field :role,
+          placeholder: "Head of Operations",
+          class: "input input-bordered w-full flex items-center #{"input-error" if @job.errors[:role].any?}" 
+        %>
+      </div>
 
-  <%= form_for @job do |form| %>
-    <div class="field">
-      <%= form.label :company %>
-      <%= form.text_field :company %>
-    </div>
+      <div>
+        <%= form.label :link, class: "label-text font-bold" %>
+          <% if @job.errors[:link].any? %>
+            <% @job.errors[:link].each do |error| %>
+              <span class="text-xs text-error"><%= error %></span>
+            <% end %>
+          <% end %>
+        <%= form.text_field :link,
+          placeholder: "https://www.sky.net",
+          class: "input input-bordered w-full flex items-center #{"input-error" if @job.errors[:link].any?}" 
+        %>
+      </div>
 
-    <div class="field">
-      <%= form.label :role %>
-      <%= form.text_field :role %>
-    </div>
-
-    <div class="field">
-      <%= form.label :link %>
-      <%= form.text_field :link %>
-    </div>
-
-    <div class="field">
-      <%= form.label :description %>
-      <%= form.text_area :description %>
-    </div>
-    
-    <div class="actions">
-      <%= form.submit %>
+      <div>
+        <%= form.label :description, class: "label-text font-bold" %>
+          <% if @job.errors[:description].any? %>
+            <% @job.errors[:description].each do |error| %>
+              <span class="text-xs text-error"><%= error %></span>
+            <% end %>
+          <% end %>
+        <%= form.text_area :description,
+          placeholder: "Key Responsibilities:\n - Stop Sean Conner\n - Take over the world\nPreferred Qualifications:\n - 5 years experience in world domination\n - 3 years experience in fighting The Terminator",
+          class: "textarea textarea-bordered textarea-md min-w-full h-48 max-w-xs resize  #{"textarea-error" if @job.errors[:description].any?}"
+        %>
+      </div>
+      
+      <div class="flex flex-row justify-end">
+        <%= form.submit "Submit", class: "btn btn-active btn-primary" %>
+      </div>
     </div>
   <% end %>
 </main>

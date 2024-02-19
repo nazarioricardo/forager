@@ -52,7 +52,7 @@ module Authentication
     user.google_token = auth['access_token'] 
     user.refresh_token = auth['refresh_token']
     expires_in = auth['expires_in']
-    user.expires_at = Time.at(expires_in.seconds.from_now).to_datetime
+    user.expires_at = expires_in.to_i.seconds.from_now
     user.save
   end
 end

@@ -14,58 +14,9 @@
  *= require_self
  */
 
-:root {
-  --surface-color: #e6e8ec;
-  --surface-hover-color: #dfe2e7;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-}
-
-body {
-  width: 100vw;
-  overflow: visible;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-section {
-  padding-bottom: 18px;
-}
-
-section.dashboard {
-  width: 900px;
-}
-
-section.content {
-  width: 500px;
-}
-
-.item {
-  position: relative;
-  display: inline-block;
-  padding: 12px;
-  margin: 0;
-  width: 100%;
-  background-color: var(--surface-color);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
 .grabbable {
   cursor: grab;
   cursor: -webkit-grab;
-}
-
-.grabbable:hover {
-  background-color: var(--surface-hover-color);
 }
 
 .grabbable:active {

@@ -73,3 +73,4 @@ gem "turbolinks"
 gem 'rubyzip'
 gem 'google-api-client'
 gem 'dotenv-rails', groups: [:development, :test]
+gem "tailwindcss-rails", "~> 2.3"

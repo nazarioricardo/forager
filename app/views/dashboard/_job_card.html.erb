@@ -1,8 +1,6 @@
-<%= stylesheet_link_tag 'job_card', media: 'all', 'data-turbolinks-track': 'reload' %>
-
-<li class="item grabbable" data-id=<%= job.id %>>
-  <section class="job-content">
-    <p><%= link_to "#{job.company} - #{job.role}", job_path(job) %></p>
+<li class="grabbable card bg-neutral text-neutral-content border border-base-content cursor-grab shadow-xl active:cursor-grabbing hover:opacity-75" data-id=<%= job.id %>>
+  <div class="card-body">
+    <h2 class="card-title"><%= link_to "#{job.company} - #{job.role}", job_path(job) %></h2>
     <% if job.resume %>
         <p>Resume: <%= link_to job.resume.title, resume_path(job.resume) %></p>
       <% else %>
@@ -15,5 +13,5 @@
         <p>No Letter Selected</p>
     <% end %>
     <p><%= job.created_at.strftime('%m/%d/%Y') %></p>
-  </section>
+  </div>
 </li>

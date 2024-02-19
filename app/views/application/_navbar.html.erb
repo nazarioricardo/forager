@@ -1,17 +1,16 @@
-<%= stylesheet_link_tag 'navbar', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<nav>
-  <div class="home">
+<nav class="navbar bg-base-100">
+  <div class="flex-1">
     <% if user_signed_in? %>
-      <%= link_to "Home", dashboard_path %>
+      <%= link_to "Forager", dashboard_path, class: "btn btn-ghost text-xl" %>
     <% else %>
-      <%= link_to 'Home', root_path %>
+      <%= link_to "Forager", root_path, class: "btn btn-ghost text-xl" %>
     <% end %>
   </div>
 
-  <div class="actions">
+  <div class="flex-none">
     <% if user_signed_in? %>
-      <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %>
+      <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-ghost text-xl" %>
     <% end %>
   </div>
 </nav>

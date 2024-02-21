@@ -1,10 +1,4 @@
-
-
-<div class="navbar">
-  <div class="flex-1">
-    <h2 class="text-xl"><%= title %></h2>
-  </div>
-  <div class="flex-none">
-    <%= link_to action_label, action_route, class: "btn btn-ghost" %>
-  </div>
-</div>
+<header class="navbar">
+  <h2 class="text-xl flex-1"><%= title %></h2>
+  <%= link_to action_label, action_route, class: "btn btn-ghost flex-none" %>
+</header>

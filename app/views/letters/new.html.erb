@@ -26,6 +26,7 @@
       
       <section>
         <%= form.hidden_field :google_drive_file_id, id: 'google-drive-file-id' %>
+        <%= render "error_list", errors: @letter.errors[:google_drive_file_id] %>
         <button type="button" id="pick-file" class="btn btn-active btn-neutral">Pick a Google Doc</button>
         <span id="chosen-file">No Document Chosen</span>
       </section>

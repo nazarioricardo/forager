@@ -19,7 +19,7 @@
         <%= form.label :title, class: "label-text font-bold" %>
         <%= render "error_list", errors: @resume.errors[:title] %>
         <%= form.text_field :title,
-          placeholder: "The Best Professional in the World",
+          placeholder: "All the achievements... all the accolades... all the glory...",
           class: "input input-bordered w-full flex items-center #{"input-error" if @resume.errors[:title].any?}" 
         %>
       </section>

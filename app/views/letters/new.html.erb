@@ -1,36 +1,38 @@
 <%= javascript_include_tag 'drive_picker' %>
 
-<main>
-  <h1>New Letter</h1>
+<main class="container flex flex-1 flex-col overflow-scroll justify-center items-center mx-auto px-4">
 
-  <% if @letter.errors.any? %>
-    <div>
-      <h3>Found <%= pluralize(@letter.errors.count, "error") %> errors</h3>
-      <ul>
-      <% @letter.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <%= form_with model: @letter, local: true do |form| %>
-    <% if params[:job_id] %>
-      <%= form.hidden_field :job_id, value: params[:job_id] %>
-    <% end %>  
-    
-    <div class="field">
-      <%= form.label :title %>
-      <%= form.text_field :title %>
-    </div>
-    
-    <div class="field">
-      <%= form.label :google_drive_file_id %>
-      <%= form.hidden_field :google_drive_file_id, id: 'google-drive-file-id' %>
-      <button type="button" id="pick-file">Pick File</button>
-    </div>
+  <%= 
+    form_with model: @letter, 
+    local: true, 
+    html: { class: "card p-10 bg-base-200 text-base-content w-4/5 shadow-xl" } do |form|
+  %>
+    <h1 class="card-title font-bold text-xl">
+      New Letter
+    </h1>
+    <section class="card-body flex justify-end">
+      <% if params[:job_id] %>
+        <%= form.hidden_field :job_id, value: params[:job_id] %>
+      <% end %>  
 
-    <div>
-      <%= form.submit %>
-    </div>
+      <section>
+        <%= form.label :title, class: "label-text font-bold" %>
+        <%= render "error_list", errors: @letter.errors[:title] %>
+        <%= form.text_field :title,
+          placeholder: "The Best Professional in the World",
+          class: "input input-bordered w-full flex items-center #{"input-error" if @letter.errors[:title].any?}" 
+        %>
+      </section>
+      
+      <section>
+        <%= form.hidden_field :google_drive_file_id, id: 'google-drive-file-id' %>
+        <button type="button" id="pick-file" class="btn btn-active btn-neutral">Pick a Google Doc</button>
+        <span id="chosen-file">No Document Chosen</span>
+      </section>
+
+      <section class="flex flex-row justify-end">
+        <%= form.submit "Submit", class: "btn btn-active btn-primary" %>
+      </section>
+    </section>
   <% end %>
 </main>

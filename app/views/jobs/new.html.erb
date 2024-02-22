@@ -1,5 +1,4 @@
 <main class="container flex flex-1 flex-col overflow-scroll justify-center items-center mx-auto px-4">
-
   <%= form_for @job, html: { class: "card p-10 bg-base-200 text-base-content w-4/5 shadow-xl" } do |form| %>
     <h1 class="card-title font-bold text-xl">New Job</h1>
     <section class="card-body flex justify-end">
@@ -30,18 +29,18 @@
         %>
       </section>
 
-      <div>
+      <section>
         <%= form.label :description, class: "label-text font-bold" %>
         <%= render "error_list", errors: @job.errors[:description] %>
         <%= form.text_area :description,
           placeholder: "Key Responsibilities:\n - Stop Sean Conner\n - Take over the world\nPreferred Qualifications:\n - 5 years experience in world domination\n - 3 years experience in fighting The Terminator",
           class: "textarea textarea-bordered textarea-md min-w-full h-48 max-w-xs resize  #{"textarea-error" if @job.errors[:description].any?}"
         %>
-      </div>
+      </section>
       
-      <div class="flex flex-row justify-end">
-        <%= form.submit "Submit", class: "btn btn-active btn-primary" %>
-      </div>
+      <section class="flex flex-row justify-end">
+        <%= form.submit "Submit", class: "flex flex-row justify-end btn btn-active btn-primary" %>
+      </section>
     </section>
   <% end %>
 </main>

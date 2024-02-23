@@ -1,65 +1,76 @@
-<main>
-  <section class="content">
-    <% if @job.link.present? %>
-      <h1><%= link_to "#{@job.company} - #{@job.role}", @job.link %></h1>
-    <% else %>
-      <h1><%= "#{@job.company} - #{@job.role}" %></h1>
-    <% end %>
-    <p><%= @job.created_at.strftime('%m/%d/%Y') %></p>
-    <%= link_to 'Edit', edit_job_path(@job) %>
-  </section>
+<main class="container flex flex-1 flex-col overflow-scroll justify-center items-center mx-auto px-4">
+  <h1 class="font-bold text-2xl p-10 text-base-content w-4/5">Job</h1>
+  <section class="card p-10 bg-base-200 text-base-content w-4/5 shadow-xl">
+    <nav class="navbar flex flex-row justify-between w-full">
+      <header class="flex flex-row gap-4">
+        <% if @job.link.present? %>
+          <h2 class="card-title font-bold text-xl">
+            <%= link_to "#{@job.company} - #{@job.role}", @job.link, class: "link link-hover" %>
+          </h2>
+        <% else %>
+          <h2 class="card-title font-bold text-xl">
+            <%= "#{@job.company} - #{@job.role}" %>
+          </h2>
+        <% end %>
+        <time datatime=<%= @job.created_at %>>
+          <%= @job.created_at.strftime('%m/%d/%Y') %>
+        </time>
+      </header>
+      <%= link_to 'Edit', edit_job_path(@job), class: "btn btn-ghost" %>
+    </nav>
 
-  <section class="content">
-    <%= link_to 'Download Documents', download_job_path(@job), data: { turbo: 'false' } %>
-  </section>
+    <section class="flex flex-col gap-4">
+      <section>
+        <%= link_to 'Download Documents', download_job_path(@job), data: { turbo: 'false' }, class: "btn btn-ghost" %>
+      </section>
 
-  <section class="content">
-    <h2>Status</h2>
-    <p><%= @job.status %></p>
-  </section>
+      <section>
+        <h3 class="font-bold">Status</h3>
+        <p><%= @job.status.titleize %></p>
+      </section>
 
+      <section>
+        <h3 class="font-bold">Resume</h3>
+        <% if @job.resume %>
+        <%= link_to @job.resume.title, resume_path(@job.resume), class: "link link-hover" %>  
+        <%= link_to "View Document", url_for(@job.resume.drive_url), target: "_blank", class: "btn btn-ghost" %>
+        <% elsif @resumes.any? %>
+          <%= form_with model: @job, local: true do |form| %>
+            <div>
+              <%= form.collection_select :resume_id, @resumes, :id, :title, { include_blank: true }, class: "select select-bordered w-full max-w-xs" %>
+              <%= form.submit 'Confirm Selection', class: "btn btn-active btn-neutral" %>
+            </div>
+          <% end %>
+        <% end %>
+        <% if !@job.resume %>
+          <%= link_to 'Create a New Resume', new_resume_path(job_id: @job.id), class: "link link-hover" %>
+        <% end %>
+      </section>
 
+      <section>
+        <h3 class="font-bold">Cover Letter</h3>
+        <% if @job.letter %>
+          <%= link_to @job.letter.title, letter_path(@job.letter), class: "link link-hover" %>  
+          <%= link_to "View Document", url_for(@job.letter.drive_url), target: "_blank", class: "btn btn-ghost"  %>
+        <% elsif @letters.any? %>
+          <%= form_with model: @job, local: true do |form| %>
+            <div class="field">
+              <%= form.collection_select :letter_id, @letters, :id, :title, { include_blank: true }, class: "select select-bordered w-full max-w-xs" %>
+              <%= form.submit 'Confirm Selection', class: "btn btn-active btn-neutral" %>
+            </div>
+          <% end %>
+        <% end %>
+        
+        <% if !@job.letter %>
+          <%= link_to 'Create a New Letter', new_letter_path(job_id: @job.id), class: "link link-hover" %>
+        <% end %>
+      </section>
 
-  <section class="content">
-    <h2>Resume</h2>
-    <% if @job.resume %>
-    <%= link_to @job.resume.title, resume_path(@job.resume) %>  
-    <%= link_to "View Document", url_for(@job.resume.drive_url), target: "_blank" %>
-    <% elsif @resumes.any? %>
-      <%= form_with model: @job, local: true do |form| %>
-        <div class="field">
-          <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
-          <%= form.submit 'Confirm Resume' %>
-        </div>
-      <% end %>
-    <% end %>
-    <% if !@job.resume %>
-      <%= link_to 'Create a New Resume', new_resume_path(job_id: @job.id) %>
-    <% end %>
-  </section>
-
-  <section class="content">
-    <h2>Cover Letter</h2>
-    <% if @job.letter %>
-      <%= link_to @job.letter.title, letter_path(@job.letter) %>  
-      <%= link_to "View Document", url_for(@job.letter.drive_url), target: "_blank" %>
-    <% elsif @letters.any? %>
-      <%= form_with model: @job, local: true do |form| %>
-        <div class="field">
-          <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
-          <%= form.submit 'Confirm Letter' %>
-        </div>
-      <% end %>
-    <% end %>
-    <% if !@job.letter %>
-      <%= link_to 'Create a New Letter', new_letter_path(job_id: @job.id) %>
-    <% end %>
-
-  </section>
-
-  <section class="content">
-    <h2>Description</h2>
-    <p><%= simple_format(@job.description) %></p>
+      <section>
+        <h3 class="font-bold">Description</h3>
+        <p><%= simple_format(@job.description) %></p>
+      </section>
+    </section>
   </section>
 </main>
 

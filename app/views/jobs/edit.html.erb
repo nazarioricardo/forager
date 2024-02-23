@@ -1,61 +1,88 @@
-<main>
-  <section class="content">
-    <% if @job.link.present? %>
-      <h1><%= link_to "#{@job.company} - #{@job.role}", @job.link %></h1>
-    <% else %>
-      <h1><%= "#{@job.company} - #{@job.role}" %></h1>
-    <% end %>
-    <p><%= @job.created_at.strftime('%m/%d/%Y') %></p>
-    <%= link_to 'Cancel', job_path(@job) %>
-  </section>
+<main class="container flex flex-1 flex-col overflow-scroll justify-center items-center mx-auto px-4">
+  <h1 class="font-bold text-2xl p-10 text-base-content w-4/5">Job</h1>
+  <section class="card p-10 bg-base-200 text-base-content w-4/5 shadow-xl">
+    <nav class="navbar flex flex-row justify-between w-full">
+      <header class="flex flex-row gap-4">
+        <% if @job.link.present? %>
+          <h2 class="card-title font-bold text-xl">
+            <%= link_to "#{@job.company} - #{@job.role}", @job.link, class: "link link-hover" %>
+          </h2>
+        <% else %>
+          <h2 class="card-title font-bold text-xl">
+            <%= "#{@job.company} - #{@job.role}" %>
+          </h2>
+        <% end %>
+        <time datatime=<%= @job.created_at %>>
+          <%= @job.created_at.strftime('%m/%d/%Y') %>
+        </time>
+      </header>
+      <%= link_to 'Cancel', job_path(@job), class: "btn btn-ghost" %>
+    </nav>
 
-    <%= form_with model: @job, local: true, method: :put do |form| %>
-      <%= form.submit "Confirm Changes" %>
+    <%= form_with model: @job, html: { class: "flex flex-col gap-4" }, local: true, method: :put do |form| %>
+      <%= form.submit "Confirm Changes", class: "btn btn-active btn-primary" %>
+      <section>        
+        <%= form.label :company, class: "label-text font-bold" %>
+        <%= render "error_list", errors: @job.errors[:company] %>
+        <%= form.text_field :company, 
+          placeholder: "Skynet", 
+          class: "input input-bordered w-full flex items-center #{"input-error" if @job.errors[:company].any?}" 
+        %>
+      </section>
 
-      <div class="field">
-        <h2>Company</h2>
-        <%= form.text_field :company %>
-      </div>
+      <section>
+        <%= form.label :role, class: "label-text font-bold" %>
+        <%= render "error_list", errors: @job.errors[:role] %>
+        <%= form.text_field :role,
+          placeholder: "Head of Operations",
+          class: "input input-bordered w-full flex items-center #{"input-error" if @job.errors[:role].any?}" 
+        %>
+      </section>
 
-      <div class="field">
-        <h2>Role</h2>
-        <%= form.text_field :role %>
-      </div>
+      <section>
+        <%= form.label :link, class: "label-text font-bold" %>
+        <%= render "error_list", errors: @job.errors[:link] %>
+        <%= form.text_field :link,
+          placeholder: "https://www.sky.net",
+          class: "input input-bordered w-full flex items-center #{"input-error" if @job.errors[:link].any?}" 
+        %>
+      </section>
 
-      <div class="field">
-        <h2>Link</h2>
-        <%= form.text_field :link %>
-      </div>
+      <section class="flex flex-col gap-3">
+        <%= form.label :status, class: "label-text font-bold" %>
+        <%= render "error_list", errors: @job.errors[:status] %>
+        <%= form.select :status, Job.statuses.keys.map { |status| [status.humanize, status] }, { include_blank: false }, class: "select select-bordered w-full max-w-xs" %>
+      </section>
 
-      <div class="field">
-        <h2>Status</h2>
-        <%= form.select :status, Job.statuses.keys.map { |status| [status.humanize, status] } %>
-      </div>
-
-      <div class="field">
-        <h2>Resume</h2>
+      <section class="flex flex-col gap-3">
+        <%= form.label :resume, class: "label-text font-bold" %>
+        <%= render "error_list", errors: @job.errors[:resume] %>
         <% if @job.resume %>
-          <%= form.collection_select :resume_id, @resumes, :id, :title %>
+          <%= form.collection_select :resume_id, @resumes, :id, :title, { include_blank: false }, class: "select select-bordered w-full max-w-xs" %>
         <% else %>
-          <%= form.collection_select :resume_id, @resumes, :id, :title, include_blank: true %>
+          <%= form.collection_select :resume_id, @resumes, :id, :title, { include_blank: true }, class: "select select-bordered w-full max-w-xs" %>
         <% end %>
-        <%= link_to 'Create a New Resume', new_resume_path(job_id: @job.id) %>
-      </div>
+        <%= link_to 'Create a New Resume', new_resume_path(job_id: @job.id), class: "link link-hover"  %>
+      </section>
 
-      <div class="field">
-        <h2>Cover Letter</h2>
+      <section class="flex flex-col gap-3">
+        <%= form.label :letter, class: "label-text font-bold" %>
         <% if @job.letter %>
-          <%= form.collection_select :letter_id, @letters, :id, :title %>
+          <%= form.collection_select :letter_id, @letters, :id, :title, { include_blank: false }, class: "select select-bordered w-full max-w-xs" %>
         <% else %>
-          <%= form.collection_select :letter_id, @letters, :id, :title, include_blank: true %>
+          <%= form.collection_select :letter_id, @letters, :id, :title, { include_blank: true }, class: "select select-bordered w-full max-w-xs" %>
         <% end %>
-        <%= link_to 'Create a New Letter', new_letter_path(job_id: @job.id) %>
-      </div>
+        <%= link_to 'Create a New Letter', new_letter_path(job_id: @job.id), class: "link link-hover"  %>
+      </section>
 
-      <div class="field">
-        <h2>Description</h2>
-        <%= form.text_area :description %>
-      </div>
+      <section class="flex flex-col gap-3">
+        <%= form.label :description, class: "label-text font-bold" %>
+        <%= render "error_list", errors: @job.errors[:description] %>
+        <%= form.text_area :description,
+          placeholder: "Key Responsibilities:\n - Stop Sean Conner\n - Take over the world\nPreferred Qualifications:\n - 5 years experience in world domination\n - 3 years experience in fighting The Terminator",
+          class: "textarea textarea-bordered textarea-md min-w-full h-48 max-w-xs resize  #{"textarea-error" if @job.errors[:description].any?}"
+        %>
+      </section>
     <% end %>
 
 </main>

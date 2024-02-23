@@ -1,22 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="light">
   <head>
     <title>Forager</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script src="https://apis.google.com/js/api.js"></script>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <%= javascript_importmap_tags %>
   </head>
 
-<body 
+<body
+  class="flex flex-col min-h-screen"
   data-google-oauth-token="<%= current_user&.google_token %>"
   data-google-oauth-client-id="<%= ENV['GOOGLE_OAUTH_CLIENT_ID'] %>"
   data-google-service-key="<%= ENV['GOOGLE_SERVICE_KEY'] %>"
 >
+
   <%= render 'navbar' %>
-    <%= yield %>
-  </body>
+  <% if flash[:alert] %>
+    <div role="alert" class="alert alert-error">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span><%= flash[:alert] %></span>
+    </div>      
+  <% end %>
+  <%= yield %>
+</body>
 </html>

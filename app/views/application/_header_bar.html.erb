@@ -1,6 +1,4 @@
-<%= stylesheet_link_tag 'header_bar', media: 'all', 'data-turbolinks-track': 'reload' %>
-
-<div class="header_bar">
-  <h2><%= title %></h2>
-  <%= link_to action_label, action_route %>
-</div>
+<nav class="navbar">
+  <h2 class="text-xl flex-1"><%= title %></h2>
+  <%= link_to action_label, action_route, class: "btn btn-ghost flex-none" %>
+</nav>

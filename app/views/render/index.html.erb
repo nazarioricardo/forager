@@ -1,7 +1,18 @@
-<% if user_signed_in? %>
-  <h1>Welcome Home, <%= current_user.email %></h1>
-  <%= link_to "Dashboard", dashboard_path %>
-<% else %>
-  <h1>Home</h1>
-  <%= button_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } %>  
-<% end %>
+<div class="card card-body w-96 bg-primary text-primary-content">
+  <% if user_signed_in? %>
+    <h2 class="card-title">Welcome Home, <%= current_user.email %></h2>
+    
+    <%= link_to "Dashboard", dashboard_path %>
+  <% else %>
+    <h2>Sign In</h2>
+
+    <%= button_to "Sign in with Google", 
+      user_google_oauth2_omniauth_authorize_path,
+      method: :post, 
+      data: { turbo: false },
+      class: "btn" 
+    %>  
+
+  <% end %>
+</div>
+

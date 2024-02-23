@@ -1,6 +1,7 @@
 gapi.load("picker", {
   callback: () => {
     var pickFileButton = document.getElementById("pick-file");
+
     if (pickFileButton) {
       pickFileButton.addEventListener("click", function () {
         const oauthToken = document.body.dataset.googleOauthToken;
@@ -22,5 +23,9 @@ function pickerCallback(data) {
     const doc = data[google.picker.Response.DOCUMENTS][0];
     const fileId = doc[google.picker.Document.ID];
     document.getElementById("google-drive-file-id").value = fileId;
+    document.getElementById("chosen-file").innerHTML =
+      doc[google.picker.Document.NAME];
   }
 }
+
+function onPress(event) {}

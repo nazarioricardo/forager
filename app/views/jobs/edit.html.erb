@@ -67,6 +67,7 @@
 
       <section class="flex flex-col gap-3">
         <%= form.label :letter, class: "label-text font-bold" %>
+        <%= render "error_list", errors: @job.errors[:letter] %>
         <% if @job.letter %>
           <%= form.collection_select :letter_id, @letters, :id, :title, { include_blank: false }, class: "select select-bordered w-full max-w-xs" %>
         <% else %>

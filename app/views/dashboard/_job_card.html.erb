@@ -1,17 +1,17 @@
 <li class="grabbable card bg-neutral text-neutral-content border border-base-content cursor-grab shadow-xl active:cursor-grabbing hover:opacity-75" data-id=<%= job.id %>>
   <article class="card-body">
-    <h2 class="card-title"><%= link_to "#{job.company} - #{job.role}", job_path(job) %></h2>
+    <h2 class="card-title"><%= link_to "#{job.company} - #{job.role}", job_path(job), class: "link link-hover" %></h2>
     <ul>
       <li>
         <% if job.resume %>
-          Resume: <%= link_to job.resume.title, resume_path(job.resume) %>
+          Resume: <%= link_to job.resume.title, resume_path(job.resume), class: "link link-hover" %>
         <% else %>
           No Resume Selected
         <% end %>
       </li>
       <li>
         <% if job.letter %>
-          Letter: <%= link_to job.letter.title, letter_path(job.letter) %>
+          Letter: <%= link_to job.letter.title, letter_path(job.letter), class: "link link-hover" %>
         <% else %>
           No Letter Selected
         <% end %>

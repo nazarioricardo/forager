@@ -1,10 +1,31 @@
-<main>
-  <h1><%= @resume.title %></h1>
-  <%= link_to 'View Document', @resume.drive_url %>
-  <%= link_to 'Edit Document', @resume.docs_url %>
+<main class="container flex flex-1 flex-col overflow-scroll justify-center items-center mx-auto px-4">
+  <h1 class="font-bold text-2xl p-10 text-base-content w-4/5">Resume</h1>
+  <section class="card p-10 bg-base-200 text-base-content w-4/5 shadow-xl">
+    <nav class="navbar">
+      <h2 class="card-title font-bold text-xl">
+        <%= @resume.title %>
+      </h2>
 
-  <% @resume.jobs.each do |job| %>
-    <%= link_to "#{job.company} - #{job.role}", job_path(job) %>
-    <%= link_to 'Download Modified PDF', download_resume_path(@resume, job_id: job.id), method: :get, data: { turbo: 'false' } %>
-  <% end %>
+      <%= link_to 'View Document', @resume.drive_url, class: "btn btn-ghost" %>
+      <%= link_to 'Edit Document', @resume.docs_url, class: "btn btn-ghost" %>
+    </nav>
+
+    <section class="card-body flex justify-end">
+      <h3 class="font-bold">Jobs</h3>
+      <% if @resume.jobs.any? %>
+        <ul>
+          <% @resume.jobs.each do |job| %>
+            <li>
+              <div>
+                <%= link_to job.name, job_path(job), class: "link link-hover" %>
+                <%= link_to 'Download Modified PDF', download_resume_path(@resume, job_id: job.id), method: :get, data: { turbo: 'false' }, class: "btn btn-ghost" %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>You haven't linked any jobs to this resume.</p>
+      <% end %>
+    </section>
+  </section>
 </main>

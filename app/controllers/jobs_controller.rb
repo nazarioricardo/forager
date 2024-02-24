@@ -43,6 +43,15 @@ class JobsController < ApplicationController
     end
   end
 
+  def update_status
+    @job = Job.find(params[:id])
+    if @job.update(status: params[:status])
+      head :ok
+    else
+      head :unprocessable_entity
+    end
+  end
+
   def download
     @job = Job.find(params[:id])
     doc_service = DocumentService.new(current_user.google_token)

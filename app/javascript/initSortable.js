@@ -11,7 +11,7 @@ const initSortable = (elements) => {
         const newStatus = evt.to.id;
         const newIndex = evt.newIndex;
         console.log(newIndex);
-        fetch(`/jobs/${jobId}`, {
+        fetch(`/jobs/${jobId}/update_status`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

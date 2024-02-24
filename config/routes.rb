@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # Jobs
   resources :jobs, only: [:new, :create, :show, :update, :edit] do
     get 'download', on: :member
+    put 'update_status', on: :member
   end
 
   # Resumes

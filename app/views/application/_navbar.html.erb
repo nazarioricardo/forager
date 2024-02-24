@@ -1,16 +1,16 @@
 
 <nav class="navbar bg-base-100">
-  <div class="flex-1">
+  <header class="flex-1">
     <% if user_signed_in? %>
       <%= link_to "Forager", dashboard_path, class: "btn btn-ghost text-xl" %>
     <% else %>
       <%= link_to "Forager", root_path, class: "btn btn-ghost text-xl" %>
     <% end %>
-  </div>
+  </header>
 
-  <div class="flex-none">
+  <section class="flex-none">
     <% if user_signed_in? %>
       <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-ghost text-xl" %>
     <% end %>
-  </div>
+  </section>
 </nav>

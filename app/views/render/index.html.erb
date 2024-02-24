@@ -1,18 +1,21 @@
-<div class="card card-body w-96 bg-primary text-primary-content">
-  <% if user_signed_in? %>
-    <h2 class="card-title">Welcome Home, <%= current_user.email %></h2>
-    
-    <%= link_to "Dashboard", dashboard_path %>
-  <% else %>
-    <h2>Sign In</h2>
-
-    <%= button_to "Sign in with Google", 
-      user_google_oauth2_omniauth_authorize_path,
-      method: :post, 
-      data: { turbo: false },
-      class: "btn" 
-    %>  
-
-  <% end %>
-</div>
+<main class="container flex flex-1 flex-col overflow-scroll justify-center items-center mx-auto px-4">
+  <section class="card card p-10 w-96 bg-primary text-primary-content shadow-xl">
+    <% if user_signed_in? %>
+      <h2 class="card-title">Welcome Home, <%= current_user.email %></h2>
+      <section class="card-body">
+        <%= link_to "To Dashboard", dashboard_path, class: 'btn' %>
+      </section>
+    <% else %>
+      <h2 class="card-title">Sign In</h2>
+      <section class="card-body bg-base-200">
+        <%= button_to "Sign in with Google", 
+          user_google_oauth2_omniauth_authorize_path,
+          method: :post, 
+          data: { turbo: false },
+          class: "btn" 
+        %>  
+      </section>
+    <% end %>
+  </section>
+</main>
 

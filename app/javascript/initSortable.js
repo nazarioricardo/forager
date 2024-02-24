@@ -7,8 +7,8 @@ const initSortable = (elements) => {
       animation: 300,
       forceFallback: true,
       onEnd: function (evt) {
-        var jobId = evt.item.dataset.id; // assumes each job item has a data-id attribute with the job's id
-        var newStatus = evt.to.id;
+        const jobId = evt.item.dataset.id; // assumes each job item has a data-id attribute with the job's id
+        const newStatus = evt.to.id;
 
         fetch(`/jobs/${jobId}`, {
           method: "PUT",

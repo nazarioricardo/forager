@@ -10,6 +10,7 @@ const initSortable = (elements) => {
         const jobId = evt.item.dataset.id; // assumes each job item has a data-id attribute with the job's id
         const newStatus = evt.to.id;
         const newIndex = evt.newIndex;
+
         console.log(newIndex);
         fetch(`/jobs/${jobId}/update_status`, {
           method: "PUT",

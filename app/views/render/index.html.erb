@@ -2,13 +2,18 @@
   <section class="card card p-10 w-96 bg-primary text-primary-content shadow-xl">
     <% if user_signed_in? %>
       <h2 class="card-title">Welcome Home, <%= current_user.email %></h2>
-      <section class="card-body">
-        <%= link_to "To Dashboard", dashboard_path, class: 'btn' %>
+      <section class="card-body flex justify-center items-center">
+        <%= 
+          link_to "To Dashboard", 
+          dashboard_path, 
+          class: 'btn' 
+        %>
       </section>
     <% else %>
       <h2 class="card-title">Sign In</h2>
-      <section class="card-body">
-        <%= button_to "Sign in with Google", 
+      <section class="card-body flex justify-center items-center">
+        <%= 
+          button_to "Sign in with Google", 
           user_google_oauth2_omniauth_authorize_path,
           method: :post, 
           data: { turbo: false },

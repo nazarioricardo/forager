@@ -12,12 +12,14 @@ module Authentication
   
   def authenticate
     if current_user.nil?
+      flash[:alert] = "You are not signed in."
       redirect_to "/" and return
-
     end
 
-    if current_user.google_token.nil?
-      redirect_to omniauth_authorize_path(:user, :google_oauth2) and return
+    if current_user.google_token.nil? || current_user.refresh_token.nil?
+      sign_out current_user
+      flash[:alert] = "There was an error, please sign in again."
+      redirect_to '/' and return
     end
 
     if Time.now >= current_user.expires_at
@@ -50,7 +52,6 @@ module Authentication
     # response = JSON.parse(response.body)
     auth = JSON.parse(response.body)
     user.google_token = auth['access_token'] 
-    user.refresh_token = auth['refresh_token']
     expires_in = auth['expires_in']
     user.expires_at = expires_in.to_i.seconds.from_now
     user.save

@@ -10,7 +10,7 @@ services:
     name: forager
     env: ruby
     plan: free
-    buildCommand: "./render-build.sh"
+    buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec rails s"
     envVars:
       - key: DATABASE_URL

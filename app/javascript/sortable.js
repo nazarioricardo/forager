@@ -1,5 +1,3 @@
-import Sortable from "sortablejs";
-
 const initSortable = (elements) => {
   elements.forEach((ul) => {
     new Sortable(ul, {
